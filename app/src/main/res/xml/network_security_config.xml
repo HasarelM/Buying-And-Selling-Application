@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">www.sfa.vantagesfa.com</domain>
+        <domain includeSubdomains="true">http://sfa.vantagesfa.com</domain>
+        <domain includeSubdomains="true">sfa.vantagesfa.com</domain>
+
+        <domain includeSubdomains="true">www.axienta.lk</domain>
+        <domain includeSubdomains="true">http://localhost:29802</domain>
+        <domain includeSubdomains="true">http://localhost</domain>
+        <domain includeSubdomains="true">http://localhost:5010</domain>
+        <domain includeSubdomains="true">localhost</domain>
+        <domain includeSubdomains="true">http://www.axienta.com</domain>
+        <domain includeSubdomains="true">www.axienta.com</domain>
+        <domain includeSubdomains="true">http://203.143.42.186</domain>
+        <domain includeSubdomains="true">203.143.42.186</domain>
+        <domain includeSubdomains="true">www.203.143.42.186</domain>
+        <domain includeSubdomains="true">http://retailappapi.sahanaexpress.com</domain>
+        <domain includeSubdomains="true">retailappapi.sahanaexpress.com</domain>
+        <domain includeSubdomains="true">retailappapi.sahanaexpress</domain>
+        <domain includeSubdomains="true">http://demoapi.sahanaexpress.com</domain>
+        <domain includeSubdomains="true">demoapi.sahanaexpress.com</domain>
+        <domain includeSubdomains="true">http://donetion.tk</domain>
+        <domain includeSubdomains="true">donetion.tk</domain>
+        <domain includeSubdomains="true">https://donetion.tk</domain>
+
+        <domain includeSubdomains="true">http://easybuyapp.ga</domain>
+        <domain includeSubdomains="true">easybuyapp.ga</domain>
+        <domain includeSubdomains="true">https://easybuyapp.ga</domain>
+
+
+        http://retailappapi.sahanaexpress.com
+    </domain-config>
+</network-security-config>

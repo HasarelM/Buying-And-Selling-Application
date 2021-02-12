@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#a854d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+    </array>
+
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#7253a2</color>
+    <color name="colorAccent">#075b93</color>
+    <color name="col_green">#7253a2</color>
+    <color name="col_blue">#ed7d26</color>
+    <color name="hexa2f3b64">#2f3b64</color>
+
+    <color name="col_red">#FFF44B3E</color>
+    <color name="col_yellow">#FFCC9F45</color>
+    <color name="col_gray">#718aa9</color>
+    <color name="col_dark_red">#9E9E9E</color>
+    <color name="clr_white_900">#FFFFFF</color>
+    <color name="col_black">#000000</color>
+
+    <color name="colorWhiteButtonActive">#ffffff</color>
+    <color name="colorWhiteButtonRipple">#dadada</color>
+
+    <!--TextView Colors-->
+    <color name="colorTextViewDescription">#383737</color>
+    <color name="colorTextViewSpecialNote">#7c7b7a</color>
+    <color name="colorTextViewOptions">#6c6b6b</color>
+
+    <!--Navigation Drawer colors-->
+    <color name="colorTopOval">#17c58d</color>
+    <color name="colorSelectedMenuItemText">#ff7300</color>
+    <color name="colorNotSelectedMenuItemText">#525252</color>
+    <color name="colorSelectedMenuItemBackGround">#f6f6f6</color>
+
+    <!--Visit type colors-->
+    <color name="colorOrderPlaced">#8eefd0</color>
+    <color name="colorOrderNotPlaced">#fad637</color>
+    <color name="colorOrderUpdating">#8de5ef</color>
+
+    <!--Background color-->
+    <color name="background_color">#ebeff8</color>
+    <color name="background_color_separator">#e6e6e6</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBackGroundCardView">#F2F2F2</color>
+    <color name="colorSuggestionItemPressed">#f9f9f9</color>
+
+    <!--Text Colors-->
+    <color name="colorDashboardText">#2f2f30</color>
+    <color name="colorListTitleText">#080808</color>
+    <color name="colorListNormal1Text">#606062</color>
+    <color name="colorListNormal2Text">#636365</color>
+    <color name="colorListBlueText">#2d3192</color>
+
+    <!--Edit text colors-->
+    <!--hint color-->
+    <color name="colorHint">#b2b2b2</color>
+    <!-- When selected edit text bottom line color, cursor color & upper hint color-->
+    <color name="colorWhenSelected">#b2b2b2</color>
+    <color name="colorDefaultText">#232323</color>
+    <color name="colorDefaultLabelText">#8f8f8f</color>
+    <color name="colorDefaultHint">#c6c6c6</color>
+    <color name="colorDefaultSeparator">#ededed</color>
+
+    <!--Oval Colors-->
+    <color name="colorOvalDashboardBlue">#7998fd</color>
+
+    <!--Floating Action Button-->
+    <color name="colorFloatingActionButton">#fad736</color>
+    <color name="colorActiveFloatingActionButton">#deb700</color>
+    <color name="colorFloatingMenuItemColor">#9462fb</color>
+    <color name="colorDimBackground">#bebebe</color>
+
+    <!--Button Colors-->
+    <color name="colorDefaultButtonActive">#110eb5</color>
+    <color name="colorDefaultButtonDisable">#80005b94</color>
+    <color name="colorDefaultButtonRipple">#0a58dd</color>
+    <color name="colorGrayButtonActive">#ededec</color>
+    <color name="colorGrayButtonRipple">#dadada</color>
+    <color name="colorBlueButtonActive">#739ef9</color>
+    <color name="colorBlueButtonRipple">#668cde</color>
+    <color name="colorRedButtonActive">#f66068</color>
+    <color name="colorRedButtonRipple">#eb5e66</color>
+    <color name="colorBlueAttachButtonActive">#5ca7f7</color>
+    <color name="colorBlueAttachButtonRipple">#5592d4</color>
+    <color name="colorPurplePrintButtonActive">#AE9CD1</color>
+    <color name="colorPurplePrintButtonRipple">#756498</color>
+    <color name="colorDashBoardHomeButtonActive">#97c4fd</color>
+    <color name="colorDashBoardHomeButtonBorder">#5e83fb</color>
+    <color name="colorDashBoardAnalyticsButtonActive">#b698f2</color>
+    <color name="colorDashBoardAnalyticsButtonBorder">#8b57f5</color>
+</resources>
