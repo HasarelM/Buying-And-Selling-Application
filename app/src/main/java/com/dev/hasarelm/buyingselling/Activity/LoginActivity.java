@@ -186,12 +186,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                             if (type == 1) {
 
-                                                CustomTost(LoginActivity.this, "" + message);
+                                                CustomTost(LoginActivity.this, "Seller Login" );
                                                 Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
                                                 startActivity(intent);
                                             } else if (type == 2) {
 
-                                                CustomTost(LoginActivity.this, "" + message);
+                                                CustomTost(LoginActivity.this, "Customer login");
                                                 Intent intent = new Intent(LoginActivity.this, CustomerHomeActivity.class);
                                                 startActivity(intent);
                                             }

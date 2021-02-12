@@ -3,7 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_gravity="center"
     android:layout_height="match_parent"
     tools:context=".Activity.Customer.CustomerHomeActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container"
+        >
+        <!-- Main content -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/customer_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/purple_500"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:menu="@menu/customer_bottom_navigation_menu"
+            />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

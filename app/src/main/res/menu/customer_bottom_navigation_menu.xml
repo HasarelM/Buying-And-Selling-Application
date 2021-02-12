@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/customer_navigation_home"
+        android:icon="@drawable/ic_baseline_account_balance_24"
+        android:title="Home" />
+    <item
+        android:id="@+id/customer_navigation_sms"
+        android:icon="@drawable/ic_baseline_change_circle_24"
+        android:title="History" />
+    <item
+        android:id="@+id/customer_navigation_notifications"
+        android:icon="@drawable/ic_baseline_notification_add_24"
+        android:title="Notification" />
+</menu>

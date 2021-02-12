@@ -3,17 +3,17 @@
     android:shape="rectangle" >
 
     <!-- view background color -->
-    <solid android:color="@color/col_green" >
+    <solid android:color="#139306" >
     </solid>
 
     <!-- view border color and width -->
     <stroke
         android:width="0.5dp"
-        android:color="@color/col_green" >
+        android:color="#139306" >
     </stroke>
 
     <!-- Here is the corner radius -->
-    <corners android:radius="25dp" >
+    <corners android:radius="50dp" >
     </corners>
 
 </shape>

@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <gradient
-        android:endColor="#91EAE4"
-        android:centerColor="#86A8E7"
-        android:startColor="#7F7FD5"
-        android:angle="90" />
+    <solid android:color="#139306" >
+    </solid>
+
+    <!-- view border color and width -->
+    <stroke
+        android:width="0.5dp"
+        android:color="#139306" >
+    </stroke>
+
+    <!-- Here is the corner radius -->
+    <corners android:radius="50dp" >
+    </corners>
 </shape>

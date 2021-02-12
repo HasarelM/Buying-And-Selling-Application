@@ -2,6 +2,7 @@ package com.dev.hasarelm.buyingselling.Common;
 
 import com.dev.hasarelm.buyingselling.Model.CustomerRegisterModel;
 import com.dev.hasarelm.buyingselling.Model.DistrictsModel;
+import com.dev.hasarelm.buyingselling.Model.ForgetPasswordModel;
 import com.dev.hasarelm.buyingselling.Model.UserLogin;
 import com.dev.hasarelm.buyingselling.Model.VehicleTypeModel;
 
@@ -11,6 +12,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 import retrofit2.http.Url;
 
 public interface Endpoints {
@@ -34,4 +36,9 @@ public interface Endpoints {
     @Headers({"Content-Type: application/json"})
     @GET
     Call<VehicleTypeModel> getVehicleType(@Url String Url);
+
+    //forget password method
+    @Headers({"Content-Type: application/json"})
+    @POST
+    Call<ForgetPasswordModel> forgetPassword(@Url String Url , @Query("email") String email);
 }

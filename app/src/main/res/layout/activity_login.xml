@@ -14,7 +14,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:background="@color/col_red"
             android:layout_width="match_parent"
             android:layout_height="300dp">
 
@@ -72,7 +71,6 @@
                     <EditText
                         android:id="@+id/activity_login_et_username"
                         android:hint=" Enter User name"
-                        android:text="hasarelmadola95@gmail.com"
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:paddingLeft="3dp"
@@ -158,7 +156,6 @@
 
             </LinearLayout>
 
-
             <Button
                 android:id="@+id/activity_login_btn_login"
                 android:textSize="15dp"
@@ -170,7 +167,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:elevation="100dp"
-                android:background="@drawable/bg_background_button"
+                android:background="@drawable/back_ground_colour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

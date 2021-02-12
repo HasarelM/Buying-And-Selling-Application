@@ -316,13 +316,13 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
             mEtMobileNo.requestFocus();
             mEtMobileNo.setError("invalid mobile number");
             return false;
-        }  else if (password.length() == 0) {
+        }  else if (password.length() < 7) {
             mEtPassword.requestFocus();
-            mEtPassword.setError("Password cannot be blank");
+            mEtPassword.setError("Password length should be more than 7");
             return false;
-        } else if (c_password.length() == 0) {
+        } else if (c_password.length() <7) {
             mEtC_Password.requestFocus();
-            mEtC_Password.setError("C_Password cannot be blank");
+            mEtC_Password.setError("Password length should be more than 7");
             return false;
         } else if (!TextUtils.isEmpty(password) && !TextUtils.isEmpty(c_password)) {
             if (password.equals(c_password)) {
