@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.dev.hasarelm.buyingselling.Activity.Customer.CustomerRegisterActivity;
 import com.dev.hasarelm.buyingselling.Activity.LoginActivity;
 import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
@@ -94,7 +93,6 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
     private void getVehicleTypes() {
 
         try {
-
             Endpoints apiService = RetrofitClient.getLoginClient().create(Endpoints.class);
             Call<VehicleTypeModel> call_customer = apiService.getVehicleType(VLF_BASE_URL + "vehicle-types");
             call_customer.enqueue(new Callback<VehicleTypeModel>() {

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,8 +55,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //Ui Components
     private EditText mEtUsername, mEtPassword;
     private Button mBtnLogin, mBtnRegister;
-    private TextView mTvForgetPassword;
+    private TextView mTvForgetPassword,mTvClickRegister;
     private RadioButton mRbnCustomer, mRbnSeller;
+    private LinearLayout mLinearLayout;
 
     private ArrayList<login> mLogin;
     private UserLogin mLoginUserModel;
@@ -337,6 +339,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mBtnRegister = findViewById(R.id.activity_login_btn_register);
         mRbnSeller = findViewById(R.id.activity_login_rbn_seller);
         mRbnCustomer = findViewById(R.id.activity_login_rbn_buyer);
+        mLinearLayout = findViewById(R.id.radio_layout);
+        mTvClickRegister = findViewById(R.id.text_register);
+        mTvClickRegister.setOnClickListener(this);
         mBtnLogin.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
         mTvForgetPassword.setOnClickListener(this);
@@ -455,6 +460,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.activity_login_btn_register:
                 userRegister();
+                break;
+            case R.id.text_register:
+                mLinearLayout.setVisibility(View.VISIBLE);
+                mBtnRegister.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;

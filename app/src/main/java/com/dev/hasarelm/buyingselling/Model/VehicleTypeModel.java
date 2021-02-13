@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class VehicleTypeModel {
 
-    private ArrayList<vehicleTypes>vehicleTypes;
+   private ArrayList<vehicleTypes>vehicleTypes;
 
     public ArrayList<com.dev.hasarelm.buyingselling.Model.vehicleTypes> getVehicleTypes() {
         return vehicleTypes;

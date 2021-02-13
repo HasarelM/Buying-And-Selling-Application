@@ -1,7 +1,6 @@
 package com.dev.hasarelm.buyingselling.Model;
 
 public class vehicleTypes {
-
     private int id;
 
     public int getId() {
