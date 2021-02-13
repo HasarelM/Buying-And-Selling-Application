@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,14 +18,18 @@ import com.dev.hasarelm.buyingselling.Activity.LoginActivity;
 import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
 import com.dev.hasarelm.buyingselling.Model.CustomerRegisterModel;
+import com.dev.hasarelm.buyingselling.Model.DistrictsModel;
+import com.dev.hasarelm.buyingselling.Model.districtTypes;
 import com.dev.hasarelm.buyingselling.Model.register;
 import com.dev.hasarelm.buyingselling.R;
 import com.google.gson.Gson;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -37,10 +43,13 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
     private EditText mEtFname,mEtLname,mEtEmail,mEtPassword,mEtC_Password,mEtMobileNo,metAddress,mEtStreet,mEtCity;
     private Button mBtnBuyerRegister;
     private ImageView mImgBackArrow;
+    private SearchableSpinner mSpDistrict;
 
     private String message;
     private ArrayList<register> mRegister;
     private CustomerRegisterModel mCustomerRegisterModel;
+    private List<String> mSelectDistrict = new ArrayList<String>();
+    private List<String> mSelectVehicleType = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +57,17 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_customer_register);
 
         initView();
+
+        final ProgressDialog myPd_ring=ProgressDialog.show(this, "Please wait", "", true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                myPd_ring.dismiss();
+                // show popup
+            }
+        }, 3000);
+
+        getDistricts();
     }
 
     private void initView() {
@@ -61,10 +81,50 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
         metAddress = findViewById(R.id.activity_customer_register_et_address);
         mEtStreet = findViewById(R.id.activity_customer_register_et_street);
         mEtCity = findViewById(R.id.activity_customer_register_et_city);
+        mSpDistrict = findViewById(R.id.activity_customer_register_sp_district);
         mImgBackArrow = findViewById(R.id.customer_back_arrow);
         mImgBackArrow.setOnClickListener(this);
         mBtnBuyerRegister = findViewById(R.id.activity_customer_register_btn_register);
         mBtnBuyerRegister.setOnClickListener(this);
+    }
+
+
+    private void getDistricts() {
+
+        try {
+
+            Endpoints endPoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<DistrictsModel> call = endPoints.getDistrict(VLF_BASE_URL + "districts");
+            call.enqueue(new Callback<DistrictsModel>() {
+                @Override
+                public void onResponse(Call<DistrictsModel> call, Response<DistrictsModel> response) {
+                    if (response.code() == 200) {
+
+                        DistrictsModel districtsModel = response.body();
+                        ArrayList<districtTypes> districtsArrayList = districtsModel.getDistrictTypes();
+
+                        for (districtTypes DS : districtsArrayList)//loda all district
+                        {
+                            String Description = DS.getName();
+                            mSelectDistrict.add(Description);
+                        }
+
+                        mSelectDistrict.add(0,"Select District");
+                        ArrayAdapter<String> dataAdapter_type = new ArrayAdapter<String>(CustomerRegisterActivity.this, android.R.layout.simple_spinner_item, mSelectDistrict);
+                        dataAdapter_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        mSpDistrict.setAdapter(dataAdapter_type);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<DistrictsModel> call, Throwable t) {
+
+                }
+            });
+
+        } catch (Exception ff) {
+        }
+
     }
 
     @Override
@@ -105,6 +165,7 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
             String phone = mEtMobileNo.getText().toString();
             String c_password = mEtC_Password.getText().toString();
             String password = mEtPassword.getText().toString();
+            String district_type = mSpDistrict.getSelectedItemPosition()+ "";
 
             obj.setName(name+"");
             obj.setLast_name(lName+"");
@@ -113,6 +174,7 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
             obj.setAdd_line_3(city+"");
             obj.setPhone(phone+"");
             obj.setEmail(email+"");
+            obj.setDistrict_id(district_type+"");
             obj.setPassword(password+"");
             obj.setPassword_confirmation(c_password+"");
             obj.setType("2");

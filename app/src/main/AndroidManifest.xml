@@ -28,8 +28,8 @@
         <activity android:name=".Activity.Customer.CustomerHomeActivity" />
         <activity android:name=".Activity.Seller.SellerRegisterActivity" />
         <activity android:name=".Activity.Customer.CustomerRegisterActivity" />
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".Activity.LoginActivity">
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

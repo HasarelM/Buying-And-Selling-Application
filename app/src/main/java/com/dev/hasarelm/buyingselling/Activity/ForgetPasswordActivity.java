@@ -3,10 +3,12 @@ package com.dev.hasarelm.buyingselling.Activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
@@ -28,6 +30,7 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
     //Ui Components
     private EditText mEtEmail;
     private Button mBtnResetPassword;
+    private TextView mTvBackArrow;
 
 
     private String message;
@@ -47,6 +50,8 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
 
         mEtEmail = findViewById(R.id.activity_forget_password_et_change_password);
         mBtnResetPassword = findViewById(R.id.activity_forget_password_btn_reset_password);
+        mTvBackArrow = findViewById(R.id.back_arrow);
+        mTvBackArrow.setOnClickListener(this);
         mBtnResetPassword.setOnClickListener(this);
     }
 
@@ -119,6 +124,11 @@ public class ForgetPasswordActivity extends AppCompatActivity implements View.On
 
 
                 }
+                break;
+
+            case R.id.back_arrow:
+                Intent intent = new Intent(ForgetPasswordActivity.this,LoginActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

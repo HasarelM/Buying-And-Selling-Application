@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/bag"
     android:layout_height="match_parent"
     tools:context=".Activity.Seller.SellerRegisterActivity">
 
@@ -13,7 +14,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="#FF3700B3"
+            android:background="#139306"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -50,7 +51,7 @@
 
                 <TextView
                     android:text="First name "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -93,7 +94,7 @@
 
                 <TextView
                     android:text="Last name "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -135,8 +136,8 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Email "
-                    android:textColor="@color/black"
+                    android:text="Enter Email "
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -179,7 +180,7 @@
 
                 <TextView
                     android:text="Mobile no "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -223,7 +224,7 @@
 
                 <TextView
                     android:text="Vehicle Type "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -266,7 +267,7 @@
 
                 <TextView
                     android:text="Vehicle no "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -309,7 +310,7 @@
 
                 <TextView
                     android:text="District "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -350,7 +351,7 @@
 
                 <TextView
                     android:text="Password "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -376,6 +377,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:textSize="12dp"
+                    android:inputType="textPassword"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
                     android:hint=" Enter Password"
                     android:paddingLeft="3dp"
@@ -393,7 +395,7 @@
 
                 <TextView
                     android:text="Confirm Password "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -421,6 +423,7 @@
                     android:textSize="12dp"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
                     android:hint=" Enter Confirm Password"
+                    android:inputType="textPassword"
                     android:paddingLeft="3dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp" />
@@ -433,6 +436,7 @@
                 android:layout_marginRight="60dp"
                 android:layout_marginLeft="60dp"
                 android:textAllCaps="false"
+                android:layout_marginBottom="30dp"
                 android:text="Register"
                 android:textStyle="bold"
                 android:textColor="@color/white"

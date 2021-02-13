@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/bag"
     tools:context=".Activity.LoginActivity">
 
     <LinearLayout
@@ -48,7 +49,7 @@
 
                     <TextView
                         android:text="Username "
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -93,7 +94,7 @@
 
                     <TextView
                         android:text="Password "
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -122,6 +123,7 @@
                         android:paddingTop="5dp"
                         android:paddingBottom="5dp"
                         android:textSize="12dp"
+                        android:inputType="textPassword"
                         android:paddingLeft="3dp"
                         app:passwordToggleEnabled="true"
                         android:layout_width="match_parent"
@@ -142,13 +144,19 @@
                         android:id="@+id/activity_login_rbn_buyer"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:textColor="@color/white"
                         android:checked="true"
+                        android:shadowColor="@color/col_red"
+                        android:buttonTint="@color/col_red"
                         android:layout_height="wrap_content"
                         android:text="Buyer" />
                     <RadioButton
                         android:id="@+id/activity_login_rbn_seller"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:shadowColor="@color/col_red"
+                        android:buttonTint="@color/col_red"
+                        android:textColor="@color/white"
                         android:checked="false"
                         android:layout_height="wrap_content"
                         android:text="Seller" />

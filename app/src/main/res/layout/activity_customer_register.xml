@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bag"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Activity.Customer.CustomerRegisterActivity">
 
@@ -12,7 +13,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:background="#FF3700B3"
+            android:background="#139306"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -49,7 +50,7 @@
 
                 <TextView
                     android:text="First name "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -92,7 +93,7 @@
 
                 <TextView
                     android:text="Last name "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -135,7 +136,7 @@
 
                 <TextView
                     android:text="Address "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -162,7 +163,7 @@
                     android:background="@null"
                     android:textSize="12dp"
                     android:drawableLeft="@drawable/ic_baseline_email_30"
-                    android:hint=" Enter Email"
+                    android:hint=" Enter Address"
                     android:paddingLeft="3dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp" />
@@ -178,7 +179,7 @@
 
                 <TextView
                     android:text="Street "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -204,8 +205,8 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_email_30"
-                    android:hint=" Enter Email"
+                    android:drawableLeft="@drawable/ic_baseline_merge_type_24"
+                    android:hint=" Enter Street"
                     android:paddingLeft="3dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp" />
@@ -221,7 +222,7 @@
 
                 <TextView
                     android:text="City "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -248,8 +249,8 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_email_30"
-                    android:hint=" Enter Email"
+                    android:drawableLeft="@drawable/ic_baseline_location_city_24"
+                    android:hint=" Enter City"
                     android:paddingLeft="3dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp" />
@@ -264,8 +265,8 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:text="Email "
-                    android:textColor="@color/black"
+                    android:text="Enter Email "
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -309,7 +310,7 @@
 
                 <TextView
                     android:text="Mobile no "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -335,6 +336,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:textSize="12dp"
+                    android:maxLength="10"
                     android:drawableLeft="@drawable/ic_baseline_phone_android_24"
                     android:hint=" Enter Mobile no"
                     android:paddingLeft="3dp"
@@ -352,7 +354,7 @@
 
                 <TextView
                     android:text="District "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -372,14 +374,12 @@
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="true">
 
-                <EditText
-                    android:id="@+id/activity_customer_register_et_district"
+                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                    android:id="@+id/activity_customer_register_sp_district"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@null"
                     android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_assignment_ind_24"
-                    android:hint=" Enter District"
                     android:paddingLeft="3dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp" />
@@ -395,7 +395,7 @@
 
                 <TextView
                     android:text="Password "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -423,6 +423,7 @@
                     android:textSize="12dp"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
                     android:hint=" Enter Password"
+                    android:inputType="textPassword"
                     android:paddingLeft="3dp"
                     android:paddingTop="5dp"
                     android:paddingBottom="5dp" />
@@ -438,7 +439,7 @@
 
                 <TextView
                     android:text="Confirm Password "
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
@@ -464,6 +465,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:textSize="12dp"
+                    android:inputType="textPassword"
                     android:drawableLeft="@drawable/ic_baseline_lock_24"
                     android:hint=" Enter Confirm Password"
                     android:paddingLeft="3dp"
@@ -478,6 +480,7 @@
                 android:layout_marginRight="60dp"
                 android:layout_marginLeft="60dp"
                 android:textAllCaps="false"
+                android:layout_marginBottom="30dp"
                 android:text="Register"
                 android:textStyle="bold"
                 android:textColor="@color/white"
