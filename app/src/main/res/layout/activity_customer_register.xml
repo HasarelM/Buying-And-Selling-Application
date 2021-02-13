@@ -337,6 +337,7 @@
                     android:background="@null"
                     android:textSize="12dp"
                     android:maxLength="10"
+                    android:inputType="number"
                     android:drawableLeft="@drawable/ic_baseline_phone_android_24"
                     android:hint=" Enter Mobile no"
                     android:paddingLeft="3dp"
