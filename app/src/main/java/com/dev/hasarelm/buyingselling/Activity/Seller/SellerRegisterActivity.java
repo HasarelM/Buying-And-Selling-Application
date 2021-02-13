@@ -285,6 +285,7 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
         final String NameL = mEtLname.getText().toString();
         final String contact = mEtMobileNo.getText().toString();
         final String email = mEtEmail.getText().toString();
+        final String vehicle_no = mEtVehicleNo.getText().toString();
         String password = mEtPassword.getText().toString();
         String c_password = mEtC_Password.getText().toString();
 
@@ -307,6 +308,10 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
         } else if (email.length() == 0) {
             mEtEmail.requestFocus();
             mEtEmail.setError("Email cannot be blank");
+            return false;
+        }else if (vehicle_no.length() == 0) {
+            mEtVehicleNo.requestFocus();
+            mEtVehicleNo.setError("Vehicle no cannot be blank");
             return false;
         } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
             mEtEmail.requestFocus();

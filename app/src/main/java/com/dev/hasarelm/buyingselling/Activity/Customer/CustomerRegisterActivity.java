@@ -237,6 +237,9 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
         final String NameL = mEtLname.getText().toString();
         final String contact = mEtMobileNo.getText().toString();
         final String email = mEtEmail.getText().toString();
+        final String address = metAddress.getText().toString();
+        final String street = mEtStreet.getText().toString();
+        final String city = mEtCity.getText().toString();
         String password = mEtPassword.getText().toString();
         String c_password = mEtC_Password.getText().toString();
 
@@ -259,6 +262,18 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
         } else if (email.length() == 0) {
             mEtEmail.requestFocus();
             mEtEmail.setError("Email cannot be blank");
+            return false;
+        } else if (address.length() == 0) {
+            metAddress.requestFocus();
+            metAddress.setError("Address cannot be blank");
+            return false;
+        } else if (city.length() == 0) {
+            mEtCity.requestFocus();
+            mEtCity.setError("City cannot be blank");
+            return false;
+        } else if (street.length() == 0) {
+            mEtStreet.requestFocus();
+            mEtStreet.setError("Street cannot be blank");
             return false;
         } else if (!email.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
             mEtEmail.requestFocus();
