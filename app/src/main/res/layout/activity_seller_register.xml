@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/bag"
     android:layout_height="match_parent"
     tools:context=".Activity.Seller.SellerRegisterActivity">
 
@@ -38,396 +37,180 @@
         <LinearLayout
             android:layout_below="@id/toolbar"
             android:orientation="vertical"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
+            <TextView
+                android:text="Join the Esby"
+                android:textSize="22dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:text="First name "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
-
-                <EditText
-                    android:id="@+id/activity_seller_register_et_fName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_group_add"
-                    android:hint=" Enter First name"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Last name "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
-
-                <EditText
-                    android:id="@+id/activity_seller_register_et_lName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_group_add"
-                    android:hint=" Enter First name"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Enter Email "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
-
-                <EditText
-                    android:id="@+id/activity_seller_register_et_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_event_24"
-                    android:hint=" Enter Email"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Mobile no "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
-
-                <EditText
-                    android:id="@+id/activity_seller_register_et_mobile_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_local_phone_24"
-                    android:hint=" Enter Mobile no"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
-
-
-            <LinearLayout
+            <TextView
                 android:layout_marginTop="5dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
+                android:textSize="12dp"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                android:text="Create an account"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:text="Vehicle Type "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
+            <EditText
+                android:id="@+id/activity_seller_register_et_fName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="20dp"
                 android:layout_marginLeft="30dp"
-                android:layout_marginTop="3dp"
                 android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_group_add"
+                android:hint=" Enter First name" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/activity_seller_register_sp_vehicle_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:hint=" Enter Vehicle type"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Vehicle no "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
+            <EditText
+                android:id="@+id/activity_seller_register_et_lName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_group_add"
+                android:hint=" Enter First name" />
 
-                <EditText
-                    android:id="@+id/activity_seller_register_et_vehicle_no"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_local_car_wash_24"
-                    android:hint=" Enter vehicle no"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
 
-            <LinearLayout
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="District "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
+            <EditText
+                android:id="@+id/activity_seller_register_et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_event_24"
+                android:hint=" Enter Email" />
 
-                <com.toptoche.searchablespinnerlibrary.SearchableSpinner
-                    android:id="@+id/activity_seller_register_sp_district"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="34dp"
-                android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:text="Password "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
+            <EditText
+                android:id="@+id/activity_seller_register_et_mobile_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_local_phone_24"
+                android:hint=" Enter Mobile no" />
 
-                <EditText
-                    android:id="@+id/activity_seller_register_et_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:inputType="textPassword"
-                    android:drawableLeft="@drawable/ic_baseline_local_police_24"
-                    android:hint=" Enter Password"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="34dp"
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/activity_seller_register_sp_vehicle_type"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:textAlignment="center"
+                android:textSize="14dp"
+                android:hint=" Enter Vehicle type" />
 
-                <TextView
-                    android:text="Confirm Password "
-                    android:textColor="@color/white"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:text=" * "
-                    android:textColor="@color/col_red"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <androidx.cardview.widget.CardView
+            <EditText
+                android:id="@+id/activity_seller_register_et_vehicle_no"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
+                android:textAlignment="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                app:cardCornerRadius="3dp"
-                app:cardElevation="3dp"
-                app:cardMaxElevation="3dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="true">
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_local_car_wash_24"
+                android:hint=" Enter vehicle no" />
 
-                <EditText
-                    android:id="@+id/activity_seller_register_et_c_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="12dp"
-                    android:drawableLeft="@drawable/ic_baseline_local_police_24"
-                    android:hint=" Enter Confirm Password"
-                    android:inputType="textPassword"
-                    android:paddingLeft="3dp"
-                    android:paddingTop="5dp"
-                    android:paddingBottom="5dp" />
-            </androidx.cardview.widget.CardView>
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/activity_seller_register_sp_district"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"/>
+
+            <EditText
+                android:id="@+id/activity_seller_register_et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"
+                android:inputType="textPassword"
+                android:drawableLeft="@drawable/ic_baseline_local_police_24"
+                android:hint=" Enter Password" />
+
+            <EditText
+                android:id="@+id/activity_seller_register_et_c_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_local_police_24"
+                android:hint=" Enter Confirm Password"
+                android:inputType="textPassword"/>
 
             <Button
                 android:id="@+id/activity_seller_register_btn_register"
@@ -441,7 +224,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:elevation="100dp"
-                android:background="@drawable/bg_background_button"
+                android:background="@drawable/button_edge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

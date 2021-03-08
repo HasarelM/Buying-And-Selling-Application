@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.dev.hasarelm.buyingselling.Activity.LoginActivity;
 import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
+import com.dev.hasarelm.buyingselling.Common.SharedPreferencesClass;
 import com.dev.hasarelm.buyingselling.Model.CustomerRegisterModel;
 import com.dev.hasarelm.buyingselling.Model.DistrictsModel;
 import com.dev.hasarelm.buyingselling.Model.districtTypes;
@@ -166,6 +167,15 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
             String c_password = mEtC_Password.getText().toString();
             String password = mEtPassword.getText().toString();
             String district_type = mSpDistrict.getSelectedItemPosition()+ "";
+
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"EMAIL",email);
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"NAME",name);
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"LNAME",lName);
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"ADDRESS",address);
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"STREET",street);
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"CITY",city);
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"PHONE",phone);
+
 
             obj.setName(name+"");
             obj.setLast_name(lName+"");

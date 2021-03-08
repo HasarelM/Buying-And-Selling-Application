@@ -4,9 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="Customer History"
-        android:gravity="center"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_history_fragment_rv_order_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

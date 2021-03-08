@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.dev.hasarelm.buyingselling.Activity.LoginActivity;
 import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
+import com.dev.hasarelm.buyingselling.Common.SharedPreferencesClass;
 import com.dev.hasarelm.buyingselling.Model.CustomerRegisterModel;
 import com.dev.hasarelm.buyingselling.Model.DistrictsModel;
 import com.dev.hasarelm.buyingselling.Model.VehicleTypeModel;
@@ -225,6 +226,13 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
             obj.setPassword_confirmation(c_password+"");
             obj.setType("1");
             objLst.add(obj);
+
+            SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_email",email);
+            SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_name",name);
+            SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_lName",lName);
+            SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_phone",phone);
+            SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_vehicle_no",vehicle_no);
+
 
         }
 

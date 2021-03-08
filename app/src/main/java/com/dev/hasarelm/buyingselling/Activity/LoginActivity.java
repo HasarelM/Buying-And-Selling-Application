@@ -8,7 +8,9 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +29,7 @@ import com.dev.hasarelm.buyingselling.Activity.Seller.SellerRegisterActivity;
 import com.dev.hasarelm.buyingselling.Common.CommonFunction;
 import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
+import com.dev.hasarelm.buyingselling.Common.SharedPreferencesClass;
 import com.dev.hasarelm.buyingselling.Model.UserLogin;
 import com.dev.hasarelm.buyingselling.Model.login;
 import com.dev.hasarelm.buyingselling.Model.register;
@@ -58,10 +61,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView mTvForgetPassword,mTvClickRegister;
     private RadioButton mRbnCustomer, mRbnSeller;
     private LinearLayout mLinearLayout;
+    public static SharedPreferences localSp;
 
     private ArrayList<login> mLogin;
     private UserLogin mLoginUserModel;
     private String message;
+    private String username;
+    private String customer;
 
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
@@ -72,6 +78,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         initView();
+
+        try {
+            localSp = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
+            username = localSp.getString("seller_user_name","");
+            customer = localSp.getString("Customer_user_name","");
+
+            if (username.length()==0){
+
+            }else {
+
+                Intent intent = new Intent(LoginActivity.this,SellerHomeActivity.class);
+                startActivity(intent);
+            }
+
+            if (customer.length()==0){
+
+            }else {
+
+                Intent intent = new Intent(LoginActivity.this,CustomerHomeActivity.class);
+                startActivity(intent);
+            }
+
+        }catch (Exception h){}
+
 
         mRbnCustomer.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
@@ -174,31 +204,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 @Override
                                 public void onResponse(Call<UserLogin> call, Response<UserLogin> response) {
 
-                                    if (response.code() == 200) {
+                                    try {
+                                        if (response.code() == 200) {
 
-                                        myPd_ring.dismiss();
-                                        int type = 0;
-                                        message = response.body().getMessage();
-                                        mLoginUserModel = response.body();
-                                        mLogin = response.body().getLogin();
+                                            myPd_ring.dismiss();
+                                            int type = 0;
+                                            int userID = 0;
+                                            int districtID =0;
+                                            message = response.body().getMessage();
+                                            mLoginUserModel = response.body();
+                                            mLogin = response.body().getLogin();
 
-                                        for (login ls : mLogin) {
+                                            for (login ls : mLogin) {
 
-                                            type = Integer.parseInt(ls.getType());
+                                                type = Integer.parseInt(ls.getType());
+                                                userID = Integer.parseInt(ls.getId());
+                                                districtID = Integer.parseInt(ls.getDistrict_id());
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"User_ID",userID+"");
+                                                SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"districtID",districtID+"");
 
-                                            if (type == 1) {
+                                                if (type == 1) {
 
-                                                CustomTost(LoginActivity.this, "Seller Login" );
-                                                Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
-                                                startActivity(intent);
-                                            } else if (type == 2) {
+                                                    CustomTost(LoginActivity.this, "Seller Login" );
+                                                    Intent intent = new Intent(LoginActivity.this, SellerHomeActivity.class);
+                                                    startActivity(intent);
+                                                    SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"seller_user_name",mEtUsername.getText().toString().trim()+"");
 
-                                                CustomTost(LoginActivity.this, "Customer login");
-                                                Intent intent = new Intent(LoginActivity.this, CustomerHomeActivity.class);
-                                                startActivity(intent);
+                                                } else if (type == 2) {
+
+                                                    CustomTost(LoginActivity.this, "Customer login");
+                                                    Intent intent = new Intent(LoginActivity.this, CustomerHomeActivity.class);
+                                                    startActivity(intent);
+                                                    SharedPreferencesClass.setLocalSharedPreference(LoginActivity.this,"Customer_user_name",mEtUsername.getText().toString().trim()+"");
+
+                                                }
                                             }
                                         }
-                                    }
+
+                                    }catch (Exception ff){}
+
                                 }
 
                                 @Override
@@ -211,101 +255,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         } catch (Exception g) {
                         }
-
-                    /*if (mRbnDonator.isChecked()) {
-                        //login api call here
-                        //type 1 = donater
-                        try {
-                            String Json_Body = new Gson().toJson(userLoginToApp());
-                            JSONArray jsonArray = new JSONArray(Json_Body);
-                            JSONObject jsonObject = new JSONObject();
-                            if (jsonArray.length()>0){
-                                jsonObject = jsonArray.getJSONObject(0);
-                            }
-                            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
-                            EndPoints apiService = RetrofitClient.getLoginClient().create(EndPoints.class);
-                            Call<LoginUserModel> call_customer = apiService.loginUser(VLF_BASE_URL + "login", body);
-                            call_customer.enqueue(new Callback<LoginUserModel>() {
-                                @Override
-                                public void onResponse(Call<LoginUserModel> call, Response<LoginUserModel> response) {
-
-                                    if (response.code()==200){
-
-                                        int type =0;
-                                        message = response.body().getMessage();
-                                        mLoginUserModel = response.body();
-                                        mLogin = response.body().getLogin();
-
-                                        for (login ls : mLogin){
-
-                                            type = Integer.parseInt(ls.getType());
-
-                                            if (type==1){
-
-                                                CustomTost(LoginActivity.this, ""+message);
-                                                Intent intent = new Intent(LoginActivity.this, DonaterHomeActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<LoginUserModel> call, Throwable t) {
-
-                                    CustomTost(LoginActivity.this, ""+message);
-                                }
-                            });
-
-                        }catch (Exception g){}
-
-                    } else if (mRbnDelivery.isChecked()) {
-                        //login api call here
-                        //type 2 for rider
-                        try {
-                            String Json_Body = new Gson().toJson(userLoginToApp());
-                            JSONArray jsonArray = new JSONArray(Json_Body);
-                            JSONObject jsonObject = new JSONObject();
-                            if (jsonArray.length()>0){
-                                jsonObject = jsonArray.getJSONObject(0);
-                            }
-                            RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
-                            EndPoints apiService = RetrofitClient.getLoginClient().create(EndPoints.class);
-                            Call<LoginUserModel> call_customer = apiService.loginUser(VLF_BASE_URL + "login", body);
-                            call_customer.enqueue(new Callback<LoginUserModel>() {
-                                @Override
-                                public void onResponse(Call<LoginUserModel> call, Response<LoginUserModel> response) {
-
-                                    if (response.code()==200){
-
-                                        int type =0;
-                                        message = response.body().getMessage();
-                                        mLoginUserModel = response.body();
-                                        mLogin = response.body().getLogin();
-
-                                        for (login ls : mLogin){
-
-                                            type = Integer.parseInt(ls.getType());
-
-                                            if (type==2){
-
-                                                CustomTost(LoginActivity.this, ""+message);
-                                                Intent intent = new Intent(LoginActivity.this, RiderHomeActivity.class);
-                                                startActivity(intent);
-                                            }
-                                        }
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(Call<LoginUserModel> call, Throwable t) {
-
-                                    CustomTost(LoginActivity.this, ""+message);
-                                }
-                            });
-
-                        }catch (Exception g){}*/
-
 
                     } else {
                         CustomTost(LoginActivity.this, "Please select login type");

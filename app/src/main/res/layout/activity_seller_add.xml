@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Seller.SellerAddActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="#139306"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/seller_add_add_arrow"
+            android:layout_marginTop="9dp"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/ic_baseline_arrow_back_36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="Seller Add Here"
+            android:textSize="25dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginLeft="60dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_below="@id/toolbar"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Category type  "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="*"
+                    android:textColor="@color/col_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/activity_seller_add_sp_category"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"/>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Title "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="*"
+                    android:textColor="@color/col_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/activity_seller_add_et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:textAlignment="center"
+                android:paddingBottom="7dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_group_add"
+                android:hint=" Enter Title name" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Description "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="*"
+                    android:textColor="@color/col_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/activity_seller_add_et_description"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:layout_gravity="center"
+                android:background="@drawable/description_bg"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Date "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="*"
+                    android:textColor="@color/col_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/activity_seller_add_et_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp"
+                android:textAlignment="center"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"
+                android:drawableLeft="@drawable/ic_baseline_date_range_24"
+                android:hint=" Enter Title name" />
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Time "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="*"
+                    android:textColor="@color/col_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <EditText
+                    android:id="@+id/activity_seller_add_et_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:layout_marginRight="3dp"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:background="@drawable/card_edge"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="14dp"
+                    android:drawableLeft="@drawable/ic_baseline_more_time_24"
+                    android:hint=" From time" />
+
+                <EditText
+                    android:id="@+id/activity_seller_add_to_time"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:textAlignment="center"
+                    android:layout_marginLeft="3dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/card_edge"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="30dp"
+                    android:textSize="14dp"
+                    android:drawableLeft="@drawable/ic_baseline_more_time_24"
+                    android:hint=" To time" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:text="Route "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:text="*"
+                    android:textColor="@color/col_red"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+                android:id="@+id/activity_seller_add_sp_route_plane"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp"
+                android:layout_gravity="center"
+                android:background="@drawable/card_edge"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:textSize="14dp"/>
+
+            <LinearLayout
+                android:weightSum="2"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="30dp"
+                android:layout_height="130dp">
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:id="@+id/activity_seller_iv_loadImage"
+                    android:background="@drawable/description_bg"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:layout_marginRight="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"/>
+
+                <ImageView
+                    android:layout_weight="1"
+                    android:id="@+id/activity_seller_iv_loadImage2"
+                    android:background="@drawable/description_bg"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"/>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/activity_seller_add_btn_create"
+                android:textSize="15dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginLeft="60dp"
+                android:textAllCaps="false"
+                android:layout_marginBottom="30dp"
+                android:text="Create"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:elevation="100dp"
+                android:background="@drawable/button_edge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

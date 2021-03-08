@@ -29,7 +29,7 @@ public class CustomerHomeActivity extends AppCompatActivity {
         initView();
         mBtnBottomNavigation.setOnNavigationItemSelectedListener(navigationItemSelectedListener);
 
-        Fragment fragment = new SellerHomeFragment();
+        Fragment fragment = new CustomerHomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment);
@@ -61,6 +61,13 @@ public class CustomerHomeActivity extends AppCompatActivity {
                             FragmentTransaction fragmentTrkkansaction = fragmentManahhger.beginTransaction();
                             fragmentTrkkansaction.replace(R.id.container, fragmeffnt);
                             fragmentTrkkansaction.commit();
+                            return true;
+                        case R.id.customer_navigation_user_profile:
+                            Fragment fragmsseffnt = new CustomerProfileFragment();
+                            FragmentManager fragmentMallnahhger = getSupportFragmentManager();
+                            FragmentTransaction fragmentTrkkllansaction = fragmentMallnahhger.beginTransaction();
+                            fragmentTrkkllansaction.replace(R.id.container, fragmsseffnt);
+                            fragmentTrkkllansaction.commit();
                             return true;
                     }
                     return false;
