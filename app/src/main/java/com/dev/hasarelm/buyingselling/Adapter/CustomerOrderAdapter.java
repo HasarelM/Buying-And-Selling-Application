@@ -62,6 +62,16 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
             mTvDate = itemView.findViewById(R.id.customer_order_layout_date);
             mTvMobileNo = itemView.findViewById(R.id.customer_order_layout_mobile_no);
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    final int position = CustomerOrderViewHolder.this.getAdapterPosition();
+
+                    orderClickListner.customerOrderClick(position,mOrdersArrayList.get(position));
+                }
+            });
+
         }
     }
 }

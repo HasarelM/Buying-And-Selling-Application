@@ -71,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
+    public static double GPS_Longitude = 0.00, GPS_Latitude = 0.00;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

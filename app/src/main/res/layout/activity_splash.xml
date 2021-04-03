@@ -11,16 +11,27 @@
     tools:context=".SplashActivity">
 
     <ImageView
-        android:background="@drawable/buying"
+        android:background="@drawable/ebsy"
         android:id="@+id/splash_image"
         android:layout_width="250dp"
         android:layout_height="250dp"/>
 
     <TextView
         android:id="@+id/text_icon_text"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
         android:textSize="30dp"
         android:text="Buying &amp; Selling  "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/text_icon_text_copy"
+        android:layout_marginTop="190dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="12dp"
+        android:text="© 2021 Thilan All Rights Reserved  "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

@@ -51,23 +51,6 @@
         android:hint=" Enter Last name" />
 
     <EditText
-        android:id="@+id/activity_seller_register_update_et_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
-        android:textAlignment="center"
-        android:layout_gravity="center"
-        android:background="@drawable/card_edge"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:textSize="14dp"
-        android:drawableLeft="@drawable/ic_baseline_event_24"
-        android:hint=" Enter Email" />
-
-    <EditText
         android:id="@+id/activity_seller_register_update_et_mobile_no"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -83,6 +66,39 @@
         android:textSize="14dp"
         android:drawableLeft="@drawable/ic_baseline_local_phone_24"
         android:hint=" Enter Mobile no" />
+
+    <EditText
+        android:id="@+id/activity_seller_register_update_et_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:background="@drawable/card_edge"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="14dp"
+        android:drawableLeft="@drawable/ic_baseline_event_24"
+        android:hint=" Enter Address" />
+
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/activity_seller_register_update_sp_district"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="40dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:background="@drawable/card_edge"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="14dp"/>
 
     <EditText
         android:id="@+id/activity_seller_register_update_et_vehicle_no"
@@ -101,41 +117,22 @@
         android:drawableLeft="@drawable/ic_baseline_local_car_wash_24"
         android:hint=" Enter vehicle no" />
 
-    <EditText
-        android:id="@+id/activity_seller_register_update_et_password"
+    <com.toptoche.searchablespinnerlibrary.SearchableSpinner
+        android:id="@+id/activity_seller_register_update_sp_type"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:paddingLeft="5dp"
         android:paddingTop="7dp"
         android:paddingBottom="7dp"
-        android:textAlignment="center"
         android:layout_gravity="center"
         android:background="@drawable/card_edge"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:textSize="14dp"
-        android:inputType="textPassword"
-        android:drawableLeft="@drawable/ic_baseline_local_police_24"
-        android:hint=" Enter Password" />
-
-    <EditText
-        android:id="@+id/activity_seller_register_update_et_c_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
         android:textAlignment="center"
-        android:layout_gravity="center"
-        android:background="@drawable/card_edge"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:textSize="14dp"
-        android:drawableLeft="@drawable/ic_baseline_local_police_24"
-        android:hint=" Enter Confirm Password"
-        android:inputType="textPassword"/>
+        android:hint=" Enter Vehicle type" />
 
     <Button
         android:id="@+id/activity_seller_register_update_btn_register"
@@ -144,8 +141,23 @@
         android:layout_marginRight="60dp"
         android:layout_marginLeft="60dp"
         android:textAllCaps="false"
-        android:layout_marginBottom="30dp"
         android:text="Update"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:elevation="100dp"
+        android:background="@drawable/button_edge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/activity_seller_register_cancel_btn_register"
+        android:textSize="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="30dp"
+        android:text="Cancel"
         android:textStyle="bold"
         android:textColor="@color/white"
         android:elevation="100dp"

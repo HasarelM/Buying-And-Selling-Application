@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -34,9 +37,11 @@ import retrofit2.Response;
 
 import static com.dev.hasarelm.buyingselling.Common.BaseUrl.VLF_BASE_URL;
 
-public class CustomerHistoryFragment  extends Fragment implements orderItemClickListner<orderCreate> {
+public class CustomerHistoryFragment  extends Fragment /*implements orderItemClickListner<orderCreate>*/ {
 
     private RecyclerView mRvOrderList;
+    private RadioGroup mRvGroup;
+    private RadioButton mRbComplete,mRbPending;
     View rootView;
 
     private OrderList mCreateOrder;
@@ -62,6 +67,10 @@ public class CustomerHistoryFragment  extends Fragment implements orderItemClick
 
         rootView = inflater.inflate(R.layout.customer_history_fragment, container, false);
         mRvOrderList = rootView.findViewById(R.id.order_history_fragment_rv_order_list);
+        mRbComplete = rootView.findViewById(R.id.radiocomplete);
+        mRbPending = rootView.findViewById(R.id.radiopending);
+        mRvGroup = rootView.findViewById(R.id.radioGroup);
+
         try {
             localSp = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
             id = localSp.getString("User_ID", "");
@@ -70,15 +79,39 @@ public class CustomerHistoryFragment  extends Fragment implements orderItemClick
         } catch (Exception g) {
         }
 
-        getUserOrderList(userID);
+        getUserOrderList(userID,2);
+
+        mRbComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((RadioButton) v).isChecked();
+                if (checked==true){
+
+                    getUserOrderList(userID,2);
+                }
+            }
+        });
+
+        mRbPending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((RadioButton) v).isChecked();
+                if (checked==true){
+
+                    getUserOrderList(userID,1);
+                }
+            }
+        });
+
         return rootView;
     }
 
-    private void getUserOrderList(int userID) {
+
+    private void getUserOrderList(int userID,int status) {
         try {
             final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
             Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-            Call<OrderList> call = endpoints.getAllOrders(VLF_BASE_URL+"orders?customer_id=",userID);
+            Call<OrderList> call = endpoints.getAllOrders(VLF_BASE_URL+"orders?customer_id=",userID,status);
             call.enqueue(new Callback<OrderList>() {
                 @Override
                 public void onResponse(Call<OrderList> call, Response<OrderList> response) {
@@ -110,14 +143,15 @@ public class CustomerHistoryFragment  extends Fragment implements orderItemClick
 
     private void setUpRecycleView(ArrayList<orders> mOrderCreates) {
 
-        mCustomerOrderViewAdapter = new CustomerOrderViewAdapter(activity, mOrderCreates, this);
+        mCustomerOrderViewAdapter = new CustomerOrderViewAdapter(activity, mOrderCreates /*this*/);
         mRvOrderList.setHasFixedSize(true);
         mRvOrderList.setLayoutManager(new LinearLayoutManager(activity));
         mRvOrderList.setAdapter(mCustomerOrderViewAdapter);
     }
 
+   /*
     @Override
     public void orderItemClick(int position, orderCreate data) {
 
-    }
+    }*/
 }

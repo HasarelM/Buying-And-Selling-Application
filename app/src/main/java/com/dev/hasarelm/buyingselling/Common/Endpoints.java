@@ -7,7 +7,10 @@ import com.dev.hasarelm.buyingselling.Model.CustomerRegisterModel;
 import com.dev.hasarelm.buyingselling.Model.DeleteSellerAdd;
 import com.dev.hasarelm.buyingselling.Model.DistrictsModel;
 import com.dev.hasarelm.buyingselling.Model.ForgetPasswordModel;
+import com.dev.hasarelm.buyingselling.Model.NotificationModel;
 import com.dev.hasarelm.buyingselling.Model.OrderList;
+import com.dev.hasarelm.buyingselling.Model.OrderUpdates;
+import com.dev.hasarelm.buyingselling.Model.ProfileUpdates;
 import com.dev.hasarelm.buyingselling.Model.RouteModel;
 import com.dev.hasarelm.buyingselling.Model.UserDetails;
 import com.dev.hasarelm.buyingselling.Model.UserLogin;
@@ -78,7 +81,7 @@ public interface Endpoints {
 
     @Headers({"Content-Type: application/json"})
     @PUT
-    Call<CustomerRegisterModel> profileUpdate(@Url String Url ,@Body RequestBody list);
+    Call<ProfileUpdates> profileUpdate(@Url String Url , @Body RequestBody list);
 
     @Headers({"Content-Type: application/json"})
     @GET
@@ -99,9 +102,25 @@ public interface Endpoints {
 
     @Headers({"Content-Type: application/json"})
     @GET
-    Call<OrderList> getAllOrders(@Url String Url, @Query("customer_id") int customer_id);
+    Call<OrderList> getAllOrders(@Url String Url, @Query("customer_id") int customer_id,@Query("status") int status);
 
     @Headers({"Content-Type: application/json"})
     @GET
     Call<OrderList> getAll(@Url String Url);
+
+    @Headers({"Content-Type: application/json"})
+    @PUT
+    Call<OrderUpdates> orderStatusUpdate(@Url String Url , @Query("id") int id,@Query("status") int status);
+
+    @Headers({"Content-Type: application/json"})
+    @GET
+    Call<OrderList> getOrderHistory(@Url String Url, @Query("seller_id") int seller_id,@Query("status") int status);
+
+    @Headers({"Content-Type: application/json"})
+    @GET
+    Call<NotificationModel> getNotification(@Url String Url,@Query("user_id") int user_id);
+
+    @Headers({"Content-Type: application/json"})
+    @PUT
+    Call<NotificationModel> updateClickNotification(@Url String Url, @Query("id") int id);
 }

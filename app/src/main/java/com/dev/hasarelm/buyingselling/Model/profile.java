@@ -25,6 +25,34 @@ public class profile {
     private String last_name;
     private String phone;
     private String password;
+    private String add_line_1;
+    private String add_line_2;
+
+    public String getAdd_line_1() {
+        return add_line_1;
+    }
+
+    public void setAdd_line_1(String add_line_1) {
+        this.add_line_1 = add_line_1;
+    }
+
+    public String getAdd_line_2() {
+        return add_line_2;
+    }
+
+    public void setAdd_line_2(String add_line_2) {
+        this.add_line_2 = add_line_2;
+    }
+
+    public String getAdd_line_3() {
+        return add_line_3;
+    }
+
+    public void setAdd_line_3(String add_line_3) {
+        this.add_line_3 = add_line_3;
+    }
+
+    private String add_line_3;
 
     public String getPassword() {
         return password;

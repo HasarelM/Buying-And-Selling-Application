@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public class NotificationModel {
 
     private ArrayList<notifications> notifications;
+    private String message;
 
-    public ArrayList<com.dev.hasarelm.buyingselling.Model.notifications> getNotifications() {
+    public ArrayList<notifications> getNotifications() {
         return notifications;
     }
 
-    public void setNotifications(ArrayList<com.dev.hasarelm.buyingselling.Model.notifications> notifications) {
+    public void setNotifications(ArrayList<notifications> notifications) {
         this.notifications = notifications;
     }
 
@@ -22,5 +23,5 @@ public class NotificationModel {
         this.message = message;
     }
 
-    private String message;
+
 }

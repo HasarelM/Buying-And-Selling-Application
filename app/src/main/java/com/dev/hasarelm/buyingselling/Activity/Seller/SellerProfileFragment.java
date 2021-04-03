@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,15 +34,22 @@ import com.dev.hasarelm.buyingselling.Common.SharedPreferencesClass;
 import com.dev.hasarelm.buyingselling.Model.AllAdvertisementsModel;
 import com.dev.hasarelm.buyingselling.Model.CustomerRegisterModel;
 import com.dev.hasarelm.buyingselling.Model.DeleteSellerAdd;
+import com.dev.hasarelm.buyingselling.Model.DistrictsModel;
+import com.dev.hasarelm.buyingselling.Model.ProfileUpdates;
 import com.dev.hasarelm.buyingselling.Model.UserDetails;
+import com.dev.hasarelm.buyingselling.Model.VehicleTypeModel;
 import com.dev.hasarelm.buyingselling.Model.advertisementDelete;
 import com.dev.hasarelm.buyingselling.Model.advertisements;
+import com.dev.hasarelm.buyingselling.Model.districtTypes;
 import com.dev.hasarelm.buyingselling.Model.profile;
+import com.dev.hasarelm.buyingselling.Model.profileUpdate;
 import com.dev.hasarelm.buyingselling.Model.register;
+import com.dev.hasarelm.buyingselling.Model.vehicleTypes;
 import com.dev.hasarelm.buyingselling.R;
 import com.dev.hasarelm.buyingselling.interfaces.addDeleteListner;
 import com.dev.hasarelm.buyingselling.interfaces.addLongClickListner;
 import com.google.gson.Gson;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -65,11 +73,13 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
     private RatingBar mRatingBar;
     private TextView mTvProfileEdit,mTvLogOut;
     private RecyclerView mRvSellerAddList;
+    private SearchableSpinner mSpVehicle,mSpDistrict;
 
     private String message;
-    private ArrayList<register> mRegister;
+    private ArrayList<profileUpdate> mRegister;
     private List<String> mSelectVehicleType = new ArrayList<String>();
-    private CustomerRegisterModel mCustomerRegisterModel;
+    private List<String> mSelectDistrict = new ArrayList<String>();
+    private ProfileUpdates mProfileUpdateModel;
     private Dialog dialog,dialog2;
     private UserDetails mUserDetails;
     private ArrayList<profile>mProfile;
@@ -105,25 +115,42 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
 
         mRvSellerAddList = rootView.findViewById(R.id.seller_add_rv_ist);
-
+        mSpDistrict = rootView.findViewById(R.id.activity_seller_register_update_sp_district);
+        mSpVehicle = rootView.findViewById(R.id.activity_seller_register_update_sp_type);
         mTvLogOut = rootView.findViewById(R.id.log_out_btn_seller);
         mTvProfileEdit = rootView.findViewById(R.id.editProfile_tv);
         mTvLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
-                SharedPreferencesClass.ClearSharedPreference(getContext(),"seller_user_name");
+                new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                        .setTitleText("Are you sure?")
+                        .setContentText("Do you want to logout!")
+                        .setConfirmText("Yes")
+                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                                Intent intent = new Intent(getContext(), LoginActivity.class);
+                                startActivity(intent);
+                                SharedPreferencesClass.ClearSharedPreference(getContext(),"seller_user_name");
+                            }
+                        })
+                        .setCancelButton("No", new SweetAlertDialog.OnSweetClickListener() {
+                            @Override
+                            public void onClick(SweetAlertDialog sDialog) {
+                                sDialog.dismissWithAnimation();
+                            }
+                        })
+                        .show();
             }
         });
-
 
         mTvProfileEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //updateProfile();
+                updateProfile();
             }
         });
 
@@ -131,7 +158,98 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
         getSellerOwnAdds(userID);
 
+     /*   try {
+            getVehicleTypes();
+            getDistricts();
+        }catch (Exception f){}*/
+
+
         return rootView;
+    }
+
+    private void getVehicleTypes() {
+
+        try {
+            Endpoints apiService = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<VehicleTypeModel> call_customer = apiService.getVehicleType(VLF_BASE_URL + "vehicle-types");
+            call_customer.enqueue(new Callback<VehicleTypeModel>() {
+                @Override
+                public void onResponse(Call<VehicleTypeModel> call, Response<VehicleTypeModel> response) {
+
+                    try {
+                        if (response.code() == 200) {
+
+                            VehicleTypeModel vehicleTypeModel = response.body();
+                            ArrayList<vehicleTypes> vehicleTypesArrayList = vehicleTypeModel.getVehicleTypes();
+
+                            for (vehicleTypes Ds : vehicleTypesArrayList) {
+
+                                String description = Ds.getName();
+                                mSelectVehicleType.add(description);
+                            }
+
+                            mSelectVehicleType.add(0,"Select Vehicle type");
+                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mSelectVehicleType);
+                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            mSpVehicle.setAdapter(dataAdapter);
+                        }
+                    }catch (Exception f){}
+
+                }
+
+                @Override
+                public void onFailure(Call<VehicleTypeModel> call, Throwable t) {
+
+                    Toast.makeText(getContext(), "get districts", Toast.LENGTH_LONG).show();
+                }
+            });
+
+        } catch (Exception hh) {
+        }
+    }
+
+    private void getDistricts() {
+
+        try {
+
+            Endpoints endPoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<DistrictsModel> call = endPoints.getDistrict(VLF_BASE_URL + "districts");
+            call.enqueue(new Callback<DistrictsModel>() {
+                @Override
+                public void onResponse(Call<DistrictsModel> call, Response<DistrictsModel> response) {
+
+                    try {
+
+                        if (response.code() == 200) {
+
+                            DistrictsModel districtsModel = response.body();
+                            ArrayList<districtTypes> districtTypesArrayList = districtsModel.getDistrictTypes();
+
+                            for (districtTypes DS : districtTypesArrayList)//loda all district
+                            {
+                                String Description = DS.getName();
+                                mSelectDistrict.add(Description);
+                            }
+
+                            mSelectDistrict.add(0,"Select District");
+                            ArrayAdapter<String> dataAdapter_type = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, mSelectDistrict);
+                            dataAdapter_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            mSpDistrict.setAdapter(dataAdapter_type);
+                        }
+
+                    }catch (Exception gg){}
+
+                }
+
+                @Override
+                public void onFailure(Call<DistrictsModel> call, Throwable t) {
+
+                }
+            });
+
+        } catch (Exception ff) {
+        }
+
     }
 
     private void getSellerOwnAdds(int userID) {
@@ -215,7 +333,7 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
         });
     }
 
-   /* private void updateProfile() {
+    private void updateProfile() {
 
         try {
              dialog = new Dialog(getContext());
@@ -228,13 +346,11 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
             EditText email = dialog.findViewById(R.id.activity_seller_register_update_et_email);
             EditText mobile = dialog.findViewById(R.id.activity_seller_register_update_et_mobile_no);
             EditText vehicle = dialog.findViewById(R.id.activity_seller_register_update_et_vehicle_no);
-            EditText password = dialog.findViewById(R.id.activity_seller_register_update_et_password);
-            EditText c_password = dialog.findViewById(R.id.activity_seller_register_update_et_c_password);
             Button mBtnUpdate = dialog.findViewById(R.id.activity_seller_register_update_btn_register);
+            Button mBtnCancel = dialog.findViewById(R.id.activity_seller_register_cancel_btn_register);
 
             String userID = localSP.getString("User_ID","");
             int ID = Integer.parseInt(userID);
-
 
             mBtnUpdate.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -245,8 +361,6 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
                     String lat_name = email.getText().toString();
                     String phone = mobile.getText().toString();
                     String vehicle_no = vehicle.getText().toString();
-                    String pass = password.getText().toString().trim();
-                    String c_pass = c_password.getText().toString().trim();
 
                     ArrayList<profile> profiles = new ArrayList<>();
 
@@ -257,11 +371,16 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
                     pf.setLast_name(lat_name);
                     pf.setPhone(phone);
                     pf.setVehicle_no(vehicle_no);
-                    pf.setPassword(pass);
-                    pf.setC_password(c_pass);
                     profiles.add(pf);
 
                     updateUserProfileData(profiles);
+                }
+            });
+
+            mBtnCancel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
                 }
             });
 
@@ -284,39 +403,53 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
             }
             RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),jsonObject.toString());
             Endpoints apiService = RetrofitClient.getLoginClient().create(Endpoints.class);
-            Call<CustomerRegisterModel> call_customer = apiService.profileUpdate(VLF_BASE_URL + "profile/update?",body);
-            call_customer.enqueue(new Callback<CustomerRegisterModel>() {
+            Call<ProfileUpdates> call_customer = apiService.profileUpdate(VLF_BASE_URL + "profile/update?",body);
+            call_customer.enqueue(new Callback<ProfileUpdates>() {
                 @Override
-                public void onResponse(Call<CustomerRegisterModel> call, Response<CustomerRegisterModel> response) {
+                public void onResponse(Call<ProfileUpdates> call, Response<ProfileUpdates> response) {
 
                     if (response.code() == 200) {
                         myPd_ring.dismiss();
                         message = response.body().getMessage();
-                        mCustomerRegisterModel = response.body();
-                        mRegister = mCustomerRegisterModel.getRegister();
+                        mProfileUpdateModel = response.body();
+                        mRegister = mProfileUpdateModel.getProfileUpdate();
 
-                        new SweetAlertDialog(getContext())
-                                .setTitleText("Your Profile Updated!")
+                        new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                                .setTitleText("Profile Updated")
+                                .setContentText("Your profile successfully updated!")
+                                .setConfirmText("OK")
+                                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
+                                    }
+                                })
+                                .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                                    @Override
+                                    public void onClick(SweetAlertDialog sDialog) {
+                                        sDialog.dismissWithAnimation();
+                                    }
+                                })
                                 .show();
 
                         dialog.dismiss();
 
                         String Name="";
                         String LName="";
-                        String Email ="";
+                        String address ="";
                         String PhoneNo="";
                         String Vehicle="";
 
-                        for (register rs : mRegister){
+                        for (profileUpdate rs : mRegister){
 
                             Name = rs.getName().toString().trim();
                             LName = rs.getLast_name().toString().trim();
-                            Email = rs.getEmail().toString().trim();
                             PhoneNo = rs.getPhone().toString().trim();
                             Vehicle = rs.getVehicle_no().toString().trim();
+                            address = rs.getAdd_line_1().toString().trim();
                         }
 
-                        SharedPreferencesClass.setLocalSharedPreference(getContext(),"R_email",Email);
+                        SharedPreferencesClass.setLocalSharedPreference(getContext(),"R_email",address);
                         SharedPreferencesClass.setLocalSharedPreference(getContext(),"R_name",Name);
                         SharedPreferencesClass.setLocalSharedPreference(getContext(),"R_lName",LName);
                         SharedPreferencesClass.setLocalSharedPreference(getContext(),"R_phone",PhoneNo);
@@ -327,14 +460,14 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
                 }
 
                 @Override
-                public void onFailure(Call<CustomerRegisterModel> call, Throwable t) {
+                public void onFailure(Call<ProfileUpdates> call, Throwable t) {
                     myPd_ring.dismiss();
                 }
             });
 
         } catch (Exception gg) {
         }
-    }*/
+    }
 
     @Override
     public void addDeleteClick(int position, advertisements data) {
@@ -357,6 +490,13 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
             TextView mTvDate = dialog2.findViewById(R.id.add_view_visit_date);
             TextView mTvFromDate = dialog2.findViewById(R.id.add_view_from_time);
             TextView  mTvToDate = dialog2.findViewById(R.id.add_view_to_time);
+            Button mBtnClose = dialog2.findViewById(R.id.add_view_btn_close);
+            mBtnClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog2.dismiss();
+                }
+            });
 
             String cat = data.getCategory().toString().trim();
             String tit = data.getTitle().toString().trim();
@@ -364,13 +504,16 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
             String rp =  data.getCategory().toString().trim();
             String f_time = data.getFrom_time().toString().trim();
             String l_time = data.getTo_time().toString().trim();
+            String datee = data.getDate().toLowerCase().trim();
+            String r_plan = data.getRoute().toLowerCase().trim();
 
             mTvCategory.setText(cat+"");
             mTvTitle.setText(tit+"");
             mTvDescription.setText(des+"");
-            mTvRoutePlane.setText(rp+"");
+            mTvRoutePlane.setText(r_plan+"");
             mTvFromDate.setText(f_time+"");
             mTvToDate.setText(l_time+"");
+            mTvDate.setText(datee+"");
 
             dialog2.show();
 

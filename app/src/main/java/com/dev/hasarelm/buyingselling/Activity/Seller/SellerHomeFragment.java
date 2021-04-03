@@ -3,7 +3,9 @@ package com.dev.hasarelm.buyingselling.Activity.Seller;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +21,21 @@ import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
 import com.dev.hasarelm.buyingselling.Common.SharedPreferencesClass;
 import com.dev.hasarelm.buyingselling.Model.OrderList;
+import com.dev.hasarelm.buyingselling.Model.OrderUpdates;
+import com.dev.hasarelm.buyingselling.Model.orderUpdate;
 import com.dev.hasarelm.buyingselling.Model.orders;
 import com.dev.hasarelm.buyingselling.R;
 import com.dev.hasarelm.buyingselling.interfaces.customerOrderClickListner;
 
 import java.util.ArrayList;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.dev.hasarelm.buyingselling.Activity.LoginActivity.GPS_Latitude;
+import static com.dev.hasarelm.buyingselling.Activity.LoginActivity.GPS_Longitude;
 import static com.dev.hasarelm.buyingselling.Common.BaseUrl.VLF_BASE_URL;
 
 public class SellerHomeFragment extends Fragment implements customerOrderClickListner<orders> {
@@ -40,8 +47,13 @@ public class SellerHomeFragment extends Fragment implements customerOrderClickLi
     public static SharedPreferences localSp;
     private OrderList mOrderList;
     private ArrayList<orders> mOrders;
+    private OrderUpdates mOrderUpdates;
+    private ArrayList<orderUpdate> mOrderUpdateArrayList;
+    private String message;
     private String userID;
     private int id;
+    private String longitude;
+    private String latitude;
 
     View rootView;
 
@@ -111,5 +123,69 @@ public class SellerHomeFragment extends Fragment implements customerOrderClickLi
     @Override
     public void customerOrderClick(int position, orders data) {
 
+        double lng = GPS_Longitude;
+        double lat = GPS_Latitude;
+
+        int orderID = data.getId();
+        int status = 2;
+
+        new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
+                .setTitleText("Are you sure?")
+                .setContentText("Are you confirm this order to delivery")
+                .setConfirmText("Yes!")
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+
+                        updateStatus(orderID,status);
+
+                        try {
+
+                            longitude = data.getLongitude() + "";
+                            latitude = data.getLatitude() + "";
+
+                            String uri = String.format("http://maps.google.com/maps?daddr=" + latitude + "," + longitude);
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                            intent.setPackage("com.google.android.apps.maps");
+                            startActivity(intent);
+
+                        } catch (Exception h) {
+                        }
+
+                    }
+                })
+                .setCancelButton("Cancel", new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sDialog) {
+                        sDialog.dismissWithAnimation();
+                    }
+                })
+                .show();
+
+    }
+
+    private void updateStatus(int orderID, int status) {
+        Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+        Call<OrderUpdates> call = endpoints.orderStatusUpdate(VLF_BASE_URL+"order/update?",orderID,status);
+        call.enqueue(new Callback<OrderUpdates>() {
+            @Override
+            public void onResponse(Call<OrderUpdates> call, Response<OrderUpdates> response) {
+
+                try {
+                    if (response.code()==200){
+
+                        mOrderUpdates = response.body();
+                        message = mOrderUpdates.getMessage().toString().trim();
+                    }
+                }catch (Exception g){}
+
+            }
+
+            @Override
+            public void onFailure(Call<OrderUpdates> call, Throwable t) {
+
+            }
+        });
     }
 }

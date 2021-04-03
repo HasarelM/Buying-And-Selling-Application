@@ -26,7 +26,6 @@ public class CommonFunction {
         } catch (NullPointerException ee) {
 
         }
-
     }
 
     // Check network connection availability

@@ -359,6 +359,8 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
             TextView mTvDescription = add_dialog.findViewById(R.id.add_seller_view_description);
             TextView mTvTitle = add_dialog.findViewById(R.id.add_seller_view_title);
             TextView mTvDistrict = add_dialog.findViewById(R.id.add_seller_view_district);
+            TextView mTvRoute = add_dialog.findViewById(R.id.add_seller_view_route);
+            TextView mTvVisitDate = add_dialog.findViewById(R.id.add_seller_view_date);
 
             Button mBtnCreateOrder = add_dialog.findViewById(R.id.add_view_seller_btn_create);
             Button mBtnClose = add_dialog.findViewById(R.id.add_view_seller_btn_close);
@@ -370,6 +372,8 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
             String to_time = data.getTo_time().toString().trim();
             String description = data.getDescription().toString().trim();
             String title = data.getTitle().toString().trim();
+            String route = data.getRoute().toString().trim();
+            String mDate = data.getDate().toString().trim();
 
             mTvSellerName.setText(seller_name+"");
             mTvSellerMobile.setText(seller_phone+"");
@@ -378,6 +382,8 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
             mTvFromTime.setText(from_time + "");
             mTvDescription.setText(description + "");
             mTvTitle.setText(title + "");
+            mTvRoute.setText(route+"");
+            mTvVisitDate.setText(mDate+"");
 
             mBtnCreateOrder.setOnClickListener(new View.OnClickListener() {
                 @Override

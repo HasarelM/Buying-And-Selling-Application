@@ -87,6 +87,7 @@
         android:layout_gravity="center"
         android:background="@drawable/card_edge"
         android:layout_marginTop="5dp"
+        android:inputType="number"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="14dp"

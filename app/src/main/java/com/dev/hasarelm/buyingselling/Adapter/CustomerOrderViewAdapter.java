@@ -22,11 +22,11 @@ public class CustomerOrderViewAdapter extends RecyclerView.Adapter<CustomerOrder
     private Activity activity;
     private orderItemClickListner mOrderItemClickListner;
 
-    public CustomerOrderViewAdapter(Activity activity,ArrayList<orders> orderCreates,orderItemClickListner<orderCreate> orderItemClickListner){
+    public CustomerOrderViewAdapter(Activity activity,ArrayList<orders> orderCreates/*,orderItemClickListner<orderCreate> orderItemClickListner*/){
 
         this.mOrderCreates = orderCreates;
         this.activity = activity;
-        this.mOrderItemClickListner = orderItemClickListner;
+       /* this.mOrderItemClickListner = orderItemClickListner;*/
     }
 
     @NonNull
@@ -43,7 +43,15 @@ public class CustomerOrderViewAdapter extends RecyclerView.Adapter<CustomerOrder
         orders ord = mOrderCreates.get(position);
         holder.mTvRefNo.setText("CO/RDF/0000"+ord.getId()+"");
         holder.mTvOrderDetails.setText(ord.getDescription_3());
-        holder.mTvStatus.setText(ord.getStatus()+"");
+        holder.mTvDate.setText("2021-03-20");
+
+        if (ord.getStatus().equals("1")){
+
+            holder.mTvStatus.setText("Pending");
+        }else {
+
+            holder.mTvStatus.setText("Complete");
+        }
     }
 
     @Override
@@ -62,14 +70,14 @@ public class CustomerOrderViewAdapter extends RecyclerView.Adapter<CustomerOrder
             mTvOrderDetails = itemView.findViewById(R.id.order_list_layout_order_details);
             mTvStatus = itemView.findViewById(R.id.order_list_layout_order_status);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+           /* itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
                     final int position = OrderViewHolder.this.getAdapterPosition();
                     mOrderItemClickListner.orderItemClick(position, mOrderCreates.get(position));
                 }
-            });
+            });*/
         }
     }
 }

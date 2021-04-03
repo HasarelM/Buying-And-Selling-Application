@@ -4,9 +4,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/order_history_fragment_rv_order_list"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_gravity="center"
+            android:textAllCaps="false"
+            android:text="Customer Orders"
+            android:gravity="center"
+            android:textSize="22dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RadioGroup
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:id="@+id/radiocomplete"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text=" Complete"
+                android:layout_marginTop="5dp"
+                android:checked="true"
+                android:textSize="15dp" />
+
+            <RadioButton
+                android:id="@+id/radiopending"
+                android:layout_marginLeft="10dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="  Pending"
+                android:layout_marginTop="5dp"
+                android:checked="false"
+
+                android:textSize="15dp" />
+        </RadioGroup>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/order_history_fragment_rv_order_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
 
 </FrameLayout>

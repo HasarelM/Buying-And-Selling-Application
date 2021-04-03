@@ -28,7 +28,6 @@
         <domain includeSubdomains="true">easybuyapp.ga</domain>
         <domain includeSubdomains="true">https://easybuyapp.ga</domain>
 
-
         http://retailappapi.sahanaexpress.com
     </domain-config>
 </network-security-config>

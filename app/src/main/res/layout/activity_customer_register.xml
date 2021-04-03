@@ -75,7 +75,6 @@
                 android:paddingTop="7dp"
                 android:paddingBottom="7dp" />
 
-
             <EditText
                 android:id="@+id/activity_customer_register_et_lName"
                 android:layout_width="match_parent"
@@ -91,7 +90,6 @@
                 android:paddingLeft="5dp"
                 android:paddingTop="7dp"
                 android:paddingBottom="7dp" />
-
 
             <EditText
                 android:id="@+id/activity_customer_register_et_address"

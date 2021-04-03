@@ -10,7 +10,6 @@ public class RetrofitClient {
 
     private static Retrofit retrofit = null;
 
-
     public static Retrofit getLoginClient() {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .callTimeout(2, TimeUnit.MINUTES)

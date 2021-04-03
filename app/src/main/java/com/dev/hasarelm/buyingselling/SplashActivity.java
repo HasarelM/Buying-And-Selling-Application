@@ -13,7 +13,7 @@ import com.dev.hasarelm.buyingselling.Activity.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
-    private TextView mTvText;
+    private TextView mTvText,mTvCopy;
     private ImageView mImgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +22,19 @@ public class SplashActivity extends AppCompatActivity {
 
         mTvText = findViewById(R.id.text_icon_text);
         mImgView = findViewById(R.id.splash_image);
+        mTvCopy = findViewById(R.id.text_icon_text_copy);
 
         Animation animation = AnimationUtils.loadAnimation(this,R.anim.my_animation);
         mTvText.startAnimation(animation);
         mImgView.startAnimation(animation);
+        mTvCopy.startAnimation(animation);
         final Intent intent = new Intent(this,LoginActivity.class);
         Thread timer = new Thread(){
 
             public void run(){
 
                 try {
-                    sleep(5000);
+                    sleep(4000);
 
                 }catch (Exception f){
 
