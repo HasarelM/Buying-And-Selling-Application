@@ -71,7 +71,7 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
     public static SharedPreferences localSP;
     private ImageButton mBtnLogOut;
     private RatingBar mRatingBar;
-    private TextView mTvProfileEdit,mTvLogOut;
+    private TextView mTvProfileEdit,mTvLogOut,mTvSellerUsername,mTvSellerMobile;
     private RecyclerView mRvSellerAddList;
     private SearchableSpinner mSpVehicle,mSpDistrict;
 
@@ -94,7 +94,6 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
     public SellerProfileFragment(){
 
-
     }
 
     @Override
@@ -107,10 +106,22 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
         rootView = inflater.inflate(R.layout.seller_user_profile, container, false);
 
+        mTvSellerUsername = rootView.findViewById(R.id.seller_username);
+        mTvSellerMobile = rootView.findViewById(R.id.seller_mobile);
+
+        String uname ="";
+        String mobile ="";
+
         try {
             localSP = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
             ID = localSP.getString("User_ID","");
             userID = Integer.parseInt(ID);
+
+            uname = localSP.getString("S_name","");
+            mobile = localSP.getString("S_phone","");
+
+            mTvSellerUsername.setText(uname);
+            mTvSellerMobile.setText(mobile);
         }catch (Exception f){}
 
 
@@ -238,7 +249,6 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
                         }
 
                     }catch (Exception gg){}
-
                 }
 
                 @Override
@@ -249,7 +259,6 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
         } catch (Exception ff) {
         }
-
     }
 
     private void getSellerOwnAdds(int userID) {
@@ -257,12 +266,14 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
 
         Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-        Call<AllAdvertisementsModel> call = endpoints.getSellerAdds(VLF_BASE_URL+"advertisements?driver_id=",userID);
+        Call<AllAdvertisementsModel> call = endpoints.getSellerAdds(VLF_BASE_URL+"advertisements?seller_id=",userID);
         call.enqueue(new Callback<AllAdvertisementsModel>() {
             @Override
             public void onResponse(Call<AllAdvertisementsModel> call, Response<AllAdvertisementsModel> response) {
 
                 if (response.code() == 200) {
+
+                    myPd_ring.dismiss();
 
                     mAdvertisementsModel = response.body();
                     advertisements = mAdvertisementsModel.getAdvertisements();
@@ -274,7 +285,6 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
                         myPd_ring.dismiss();
                     }
                 }
-
             }
 
             @Override

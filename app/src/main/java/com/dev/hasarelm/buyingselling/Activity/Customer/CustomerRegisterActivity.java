@@ -224,6 +224,33 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
                             message = response.body().getMessage();
                             mCustomerRegisterModel = response.body();
                             mRegister = response.body().getRegister();
+
+                            int  district=0;
+                            String name ="";
+                            String mob ="";
+                            String lname ="";
+                            String address ="";
+                            String city ="";
+                            String street = "";
+
+                            for (register rs : mRegister){
+
+                                district = Integer.parseInt(rs.getDistrict_id());
+                                name = rs.getName().toString().trim();
+                                mob = rs.getPhone().toString().trim();
+                                address = rs.getAdd_line_1().toString().trim();
+                                city = rs.getAdd_line_3().toString().trim();
+                                street = rs.getAdd_line_2().toString().trim();
+                            }
+
+                            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this, "C_Name", name+"");
+                            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this, "C_Mobile", mob+"");
+                            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this, "C_Lname", lname+"");
+                            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this, "C_Address", address+"");
+                            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this, "C_City", city+"");
+                            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this, "C_Street", street+"");
+                            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this, "district", district+"");
+
                             Intent intent = new Intent(CustomerRegisterActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }

@@ -76,7 +76,7 @@ public class SellerHistoryFragment extends Fragment implements orderHistoryClick
     private void getSellerOrderHistoryList(int seller_id) {
         final ProgressDialog myPd_ring=ProgressDialog.show(getContext(), "Please wait", "", true);
         Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-        Call<OrderList> call = endpoints.getOrderHistory(VLF_BASE_URL+"orders?seller_id=",seller_id,2);
+        Call<OrderList> call = endpoints.getOrderHistory(VLF_BASE_URL+"orders?seller_id=",seller_id,3);
         call.enqueue(new Callback<OrderList>() {
             @Override
             public void onResponse(Call<OrderList> call, Response<OrderList> response) {

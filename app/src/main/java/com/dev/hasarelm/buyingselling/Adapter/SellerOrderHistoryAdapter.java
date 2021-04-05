@@ -47,7 +47,7 @@ public class SellerOrderHistoryAdapter extends RecyclerView.Adapter<SellerOrderH
         holder.mTvContact.setText(or.getDescription_2());
         holder.mTvDate.setText(or.getDescription_3());
 
-        if (or.getStatus().equals("2")){
+        if (or.getStatus().equals("3")){
 
             holder.mTvStatus.setText("Complete");
         }

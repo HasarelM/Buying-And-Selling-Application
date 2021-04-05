@@ -89,13 +89,14 @@ public class SellerHomeFragment extends Fragment implements customerOrderClickLi
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
         try {
             Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-            Call<OrderList> call = endpoints.getAll(VLF_BASE_URL + "orders");
+            Call<OrderList> call = endpoints.getAll(VLF_BASE_URL + "orders",1);
             call.enqueue(new Callback<OrderList>() {
                 @Override
                 public void onResponse(Call<OrderList> call, Response<OrderList> response) {
 
                     if (response.code() == 200) {
 
+                        myPd_ring.dismiss();
                         mOrderList = response.body();
                         mOrders = mOrderList.getOrders();
 
@@ -127,7 +128,7 @@ public class SellerHomeFragment extends Fragment implements customerOrderClickLi
         double lat = GPS_Latitude;
 
         int orderID = data.getId();
-        int status = 2;
+        int status = 3;
 
         new SweetAlertDialog(getContext(), SweetAlertDialog.WARNING_TYPE)
                 .setTitleText("Are you sure?")

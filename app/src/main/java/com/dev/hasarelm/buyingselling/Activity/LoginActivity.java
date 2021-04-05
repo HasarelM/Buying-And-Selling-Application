@@ -261,14 +261,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         CustomTost(LoginActivity.this, "Please select login type");
                     }
 
-                }else {
+                } else {
 
-                    Toast.makeText(this,"User name cannot be blank",Toast.LENGTH_LONG).show();
+                    Toast.makeText(this,"Password cannot be blank",Toast.LENGTH_LONG).show();
                 }
 
             }else {
 
-                Toast.makeText(this,"Password cannot be blank",Toast.LENGTH_LONG).show();
+                Toast.makeText(this,"User name cannot be blank",Toast.LENGTH_LONG).show();
             }
         }else{
 

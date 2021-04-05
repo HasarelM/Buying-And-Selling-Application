@@ -79,7 +79,7 @@ public class CustomerHistoryFragment  extends Fragment /*implements orderItemCli
         } catch (Exception g) {
         }
 
-        getUserOrderList(userID,2);
+        getUserOrderList(userID,1);
 
         mRbComplete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +87,7 @@ public class CustomerHistoryFragment  extends Fragment /*implements orderItemCli
                 boolean checked = ((RadioButton) v).isChecked();
                 if (checked==true){
 
-                    getUserOrderList(userID,2);
+                    getUserOrderList(userID,3);
                 }
             }
         });

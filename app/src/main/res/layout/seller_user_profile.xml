@@ -75,19 +75,19 @@
                            android:orientation="vertical">
 
                            <TextView
+                               android:id="@+id/seller_username"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:layout_marginLeft="10dp"
                                android:layout_marginTop="15dp"
-                               android:text="Mr.Hasarel "
                                android:textSize="15dp" />
 
                            <TextView
+                               android:id="@+id/seller_mobile"
                                android:layout_width="wrap_content"
                                android:layout_height="wrap_content"
                                android:layout_marginLeft="10dp"
                                android:layout_marginTop="2dp"
-                               android:text="0714817567 "
                                android:textSize="15dp" />
 
                            <TextView
@@ -108,6 +108,7 @@
            </androidx.cardview.widget.CardView>
 
            <LinearLayout
+               android:orientation="vertical"
                android:layout_marginTop="10dp"
                android:layout_width="match_parent"
                android:layout_height="match_parent">

@@ -93,7 +93,7 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
         try {
 
             localSP = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
-            districtID = localSP.getString("districtID", "");
+            districtID = localSP.getString("district", "");
             d_ID = Integer.parseInt(districtID);
 
         } catch (Exception g) {
@@ -142,12 +142,14 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
 
         Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-        Call<AllAdvertisementsModel> call = endpoints.getAddFilter(VLF_BASE_URL + "advertisements", category_id, rout_id);
+        Call<AllAdvertisementsModel> call = endpoints.getAddFilter(VLF_BASE_URL + "advertisements?category_id=", rout_id,category_id );
         call.enqueue(new Callback<AllAdvertisementsModel>() {
             @Override
             public void onResponse(Call<AllAdvertisementsModel> call, Response<AllAdvertisementsModel> response) {
 
                 if (response.code() == 200) {
+
+                    myPd_ring.dismiss();
 
                     mAdvertisementsModel = response.body();
                     advertisements = mAdvertisementsModel.getAdvertisements();

@@ -79,6 +79,7 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
     private String userID;
     String imageOne = "";
     String imageTwo = "";
+    int routeID=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,6 +236,20 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
                         ArrayAdapter<String> dataAdapter_type = new ArrayAdapter<String>(SellerAddActivity.this, android.R.layout.simple_spinner_item, arrayList);
                         dataAdapter_type.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                         mSpRoutePlane.setAdapter(dataAdapter_type);
+
+                        mSpRoutePlane.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                                routeID = position;
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> parent) {
+
+                            }
+                        });
 
                         myPd_ring.dismiss();
                     }
@@ -399,7 +414,7 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
         advertisementCreate create = new advertisementCreate();
 
         int categoryID = mSpCategory.getSelectedItemPosition();
-        int routePlane = mSpRoutePlane.getSelectedItemPosition();
+        int routePlane = routeID;
         String title = mEtTitle.getText().toString().trim();
         String description = mEtDescription.getText().toString().trim();
         String date = mEtDate.getText().toString().trim();

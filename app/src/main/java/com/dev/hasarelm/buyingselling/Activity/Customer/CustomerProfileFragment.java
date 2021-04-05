@@ -58,7 +58,6 @@ public class CustomerProfileFragment extends Fragment {
     View rootView;
 
     public CustomerProfileFragment() {
-
     }
 
     @Override
@@ -74,12 +73,12 @@ public class CustomerProfileFragment extends Fragment {
         try {
             localSP = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
             ID = localSP.getString("User_ID","");
-            name = localSP.getString("NAME","");
-            mobile = localSP.getString("PHONE","");
-            lname = localSP.getString("LNAME","");
-            address = localSP.getString("ADDRESS","");
-            street = localSP.getString("STREET","");
-            city = localSP.getString("CITY","");
+            name = localSP.getString("C_Name","");
+            mobile = localSP.getString("C_Mobile","");
+            lname = localSP.getString("C_Lname","");
+            address = localSP.getString("C_Address","");
+            street = localSP.getString("C_Street","");
+            city = localSP.getString("C_City","");
 
             userID = Integer.parseInt(ID);
         }catch (Exception f){}

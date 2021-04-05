@@ -89,7 +89,7 @@ public interface Endpoints {
 
     @Headers({"Content-Type: application/json"})
     @GET
-    Call<AllAdvertisementsModel> getSellerAdds(@Url String Url,@Query("driver_id") int id);
+    Call<AllAdvertisementsModel> getSellerAdds(@Url String Url,@Query("seller_id") int seller_id);
 
     @Headers({"Content-Type: application/json"})
     @DELETE
@@ -106,7 +106,7 @@ public interface Endpoints {
 
     @Headers({"Content-Type: application/json"})
     @GET
-    Call<OrderList> getAll(@Url String Url);
+    Call<OrderList> getAll(@Url String Url,@Query("status") int status);
 
     @Headers({"Content-Type: application/json"})
     @PUT
