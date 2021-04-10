@@ -17,6 +17,7 @@ import com.dev.hasarelm.buyingselling.interfaces.addLongClickListner;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class SellerAddsAdapter extends RecyclerView.Adapter<SellerAddsAdapter.SellerViewHolder>{
 
@@ -50,7 +51,17 @@ public class SellerAddsAdapter extends RecyclerView.Adapter<SellerAddsAdapter.Se
 
             holder.mTvCategory.setText(ad.getCategory().toString().trim());
             holder.mTvTitle.setText(ad.getTitle().toString().trim());
-            holder.mTvDate.setText(ad.getDate().toString().trim());
+
+
+            StringTokenizer tokens = new StringTokenizer(ad.getCreated_at(), "T");
+            String first = tokens.nextToken();
+            String second = tokens.nextToken();
+            StringTokenizer token = new StringTokenizer(second, "T");
+            String third = token.nextToken();
+            StringTokenizer toke = new StringTokenizer(third, ".");
+            String val = toke.nextToken();
+
+            holder.mTvDate.setText(first);
 
             try {
                 Picasso.get().load(ad.getSub_description().toString().trim())

@@ -337,6 +337,10 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
                         if (sMinute<10){
 
                             format_min = "0"+minutes;
+                           /*
+                            if (format_min.startsWith("0")){
+
+                            }*/
                         }
 
                         if (sHour<10)

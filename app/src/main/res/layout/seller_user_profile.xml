@@ -116,6 +116,7 @@
                <androidx.recyclerview.widget.RecyclerView
                    android:id="@+id/seller_add_rv_ist"
                    android:layout_width="match_parent"
+                   android:layout_marginBottom="70dp"
                    android:layout_height="match_parent"/>
 
            </LinearLayout>

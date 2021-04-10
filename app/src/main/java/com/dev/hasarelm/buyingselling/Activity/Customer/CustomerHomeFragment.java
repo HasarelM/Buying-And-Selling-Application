@@ -89,7 +89,6 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
 
         rootView = inflater.inflate(R.layout.customer_home_fragment, container, false);
 
-
         try {
 
             localSP = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);

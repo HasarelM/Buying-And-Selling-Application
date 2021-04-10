@@ -182,6 +182,7 @@
        <androidx.recyclerview.widget.RecyclerView
            android:id="@+id/customer_home_fragment_rv_list"
            android:layout_marginTop="15dp"
+           android:layout_marginBottom="70dp"
            android:layout_width="match_parent"
            android:layout_height="match_parent">
 

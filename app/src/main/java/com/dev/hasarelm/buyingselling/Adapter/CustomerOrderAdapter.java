@@ -14,6 +14,7 @@ import com.dev.hasarelm.buyingselling.R;
 import com.dev.hasarelm.buyingselling.interfaces.customerOrderClickListner;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdapter.CustomerOrderViewHolder>{
 
@@ -40,9 +41,19 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
 
         orders or = mOrdersArrayList.get(position);
         holder.mTvRefNo.setText("CSO/REF/00000"+or.getId());
-        holder.mTvCustomerName.setText(or.getDescription_1());
-        holder.mTvMobileNo.setText(or.getDescription_3());
-        holder.mTvDate.setText(or.getDescription_2());
+        holder.mTvCustomerName.setText(or.getName());
+        holder.mTvMobileNo.setText(or.getPhone());
+
+
+        StringTokenizer tokens = new StringTokenizer(or.getCreated_at(), "T");
+        String first = tokens.nextToken();
+        String second = tokens.nextToken();
+        StringTokenizer token = new StringTokenizer(second, "T");
+        String third = token.nextToken();
+        StringTokenizer toke = new StringTokenizer(third, ".");
+        String val = toke.nextToken();
+        holder.mTvDate.setText(first );
+        holder.mTvDescription.setText(or.getDescription_3());
     }
 
     @Override
@@ -52,7 +63,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
 
     public class CustomerOrderViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mTvDate,mTvMobileNo,mTvCustomerName,mTvRefNo;
+        TextView mTvDate,mTvMobileNo,mTvCustomerName,mTvRefNo,mTvDescription;
 
         public CustomerOrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -61,6 +72,7 @@ public class CustomerOrderAdapter extends RecyclerView.Adapter<CustomerOrderAdap
             mTvCustomerName = itemView.findViewById(R.id.customer_order_layout_customer_name);
             mTvDate = itemView.findViewById(R.id.customer_order_layout_date);
             mTvMobileNo = itemView.findViewById(R.id.customer_order_layout_mobile_no);
+            mTvDescription = itemView.findViewById(R.id.customer_order_layout_order_description);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
