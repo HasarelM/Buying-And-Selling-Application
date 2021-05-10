@@ -10,6 +10,7 @@ import com.dev.hasarelm.buyingselling.Model.ForgetPasswordModel;
 import com.dev.hasarelm.buyingselling.Model.NotificationModel;
 import com.dev.hasarelm.buyingselling.Model.OrderList;
 import com.dev.hasarelm.buyingselling.Model.OrderUpdates;
+import com.dev.hasarelm.buyingselling.Model.ProfilePic;
 import com.dev.hasarelm.buyingselling.Model.ProfileUpdates;
 import com.dev.hasarelm.buyingselling.Model.RouteModel;
 import com.dev.hasarelm.buyingselling.Model.UserDetails;
@@ -18,14 +19,17 @@ import com.dev.hasarelm.buyingselling.Model.VehicleTypeModel;
 import com.dev.hasarelm.buyingselling.Model.createOrder;
 import com.dev.hasarelm.buyingselling.Model.orderCreate;
 
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -73,7 +77,7 @@ public interface Endpoints {
 
     @Headers({"Content-Type: application/json"})
     @GET
-    Call<AllAdvertisementsModel> getAllAddsList(@Url String Url);
+    Call<AllAdvertisementsModel> getAllAddsList(@Url String Url,@Query("district_id")int district_id);
 
     @Headers({"Content-Type: application/json"})
     @GET
@@ -123,4 +127,8 @@ public interface Endpoints {
     @Headers({"Content-Type: application/json"})
     @PUT
     Call<NotificationModel> updateClickNotification(@Url String Url, @Query("id") int id);
+
+    @Multipart
+    @POST
+    Call<ProfilePic> uploadFile(@Url String Url, @Part MultipartBody.Part file, @Query("user_id") int user_id);
 }

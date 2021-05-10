@@ -62,11 +62,11 @@
                        android:orientation="horizontal">
 
                        <ImageView
+                           android:id="@+id/image_upload"
                            android:layout_width="85dp"
                            android:layout_height="85dp"
                            android:layout_marginTop="15dp"
-                           android:scaleType="centerCrop"
-                           android:src="@drawable/profile" />
+                           android:scaleType="centerCrop"/>
 
                        <LinearLayout
                            android:layout_marginTop="20dp"
@@ -75,8 +75,15 @@
                            android:orientation="vertical">
 
                            <TextView
-                               android:id="@+id/seller_username"
+                               android:id="@+id/pic_upload"
+                               android:layout_marginLeft="10dp"
+                               android:text="Upload picture"
                                android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"/>
+                           <TextView
+                               android:id="@+id/seller_username"
+                               android:layout_width="match_parent"
+                               android:visibility="gone"
                                android:layout_height="wrap_content"
                                android:layout_marginLeft="10dp"
                                android:layout_marginTop="15dp"

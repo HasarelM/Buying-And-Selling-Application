@@ -166,7 +166,7 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
             String phone = mEtMobileNo.getText().toString();
             String c_password = mEtC_Password.getText().toString();
             String password = mEtPassword.getText().toString();
-            String district_type = mSpDistrict.getSelectedItemPosition()+ "";
+            String district_type = mSpDistrict.getSelectedItemId()+ "";
 
             SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"EMAIL",email);
             SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"NAME",name);
@@ -175,6 +175,7 @@ public class CustomerRegisterActivity extends AppCompatActivity implements View.
             SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"STREET",street);
             SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"CITY",city);
             SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"PHONE",phone);
+            SharedPreferencesClass.setLocalSharedPreference(CustomerRegisterActivity.this,"district_type",district_type);
 
 
             obj.setName(name+"");

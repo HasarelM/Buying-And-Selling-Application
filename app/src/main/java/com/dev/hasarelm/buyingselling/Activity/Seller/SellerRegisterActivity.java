@@ -212,8 +212,8 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
             String vehicle_no = mEtVehicleNo.getText().toString();
             String c_password = mEtC_Password.getText().toString();
             String password = mEtPassword.getText().toString();
-            String vehicle_type = mSpVehicleType.getSelectedItemPosition()+ "";
-            String district_type = mSpDistrict.getSelectedItemPosition()+ "";
+            String vehicle_type = mSpVehicleType.getSelectedItemId()+ "";
+            String district_type = mSpDistrict.getSelectedItemId()+ "";
 
             obj.setEmail(email+"");
             obj.setName(name+"");
@@ -232,6 +232,7 @@ public class SellerRegisterActivity extends AppCompatActivity implements View.On
             SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_lName",lName);
             SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_phone",phone);
             SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"S_vehicle_no",vehicle_no);
+            SharedPreferencesClass.setLocalSharedPreference(SellerRegisterActivity.this,"districttype",district_type);
 
 
         }

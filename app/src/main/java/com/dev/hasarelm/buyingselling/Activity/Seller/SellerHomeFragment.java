@@ -54,6 +54,7 @@ public class SellerHomeFragment extends Fragment implements customerOrderClickLi
     private int id;
     private String longitude;
     private String latitude;
+    String districtID;
 
     View rootView;
 
@@ -76,6 +77,7 @@ public class SellerHomeFragment extends Fragment implements customerOrderClickLi
 
             localSp = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
             userID = localSp.getString("User_ID", "");
+            districtID = localSp.getString("districttype","");
             id = Integer.parseInt(userID);
 
         } catch (Exception g) {

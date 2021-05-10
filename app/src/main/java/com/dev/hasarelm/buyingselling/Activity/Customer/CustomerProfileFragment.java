@@ -5,39 +5,51 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.loader.content.CursorLoader;
 
 import com.dev.hasarelm.buyingselling.Activity.LoginActivity;
 import com.dev.hasarelm.buyingselling.Common.Endpoints;
 import com.dev.hasarelm.buyingselling.Common.RetrofitClient;
 import com.dev.hasarelm.buyingselling.Common.SharedPreferencesClass;
+import com.dev.hasarelm.buyingselling.Model.ProfilePic;
 import com.dev.hasarelm.buyingselling.Model.ProfileUpdates;
 import com.dev.hasarelm.buyingselling.Model.UserDetails;
+import com.dev.hasarelm.buyingselling.Model.pic;
 import com.dev.hasarelm.buyingselling.Model.profile;
 import com.dev.hasarelm.buyingselling.Model.profileUpdate;
 import com.dev.hasarelm.buyingselling.R;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_OK;
 import static com.dev.hasarelm.buyingselling.Common.BaseUrl.VLF_BASE_URL;
 
 public class CustomerProfileFragment extends Fragment {
@@ -56,6 +68,13 @@ public class CustomerProfileFragment extends Fragment {
     public static SharedPreferences localSP;
     String name,mobile,lname,address,street,city;
     View rootView;
+
+    static final int PICK_IMAGE_REQUEST = 1;
+    String filePath;
+    ImageView imageView;
+    TextView textView;
+    String image="";
+
 
     public CustomerProfileFragment() {
     }
@@ -93,6 +112,8 @@ public class CustomerProfileFragment extends Fragment {
         mBtnUpdate = rootView.findViewById(R.id.activity_profile_Update_update_btn_updated);
         mTvUserName = rootView.findViewById(R.id.user_name);
         mTvUserMobile = rootView.findViewById(R.id.user_name_mobile);
+        imageView = rootView.findViewById(R.id.customo);
+        textView = rootView.findViewById(R.id.pic_upload_customer);
 
         try {
             mTvUserName.setText(name+"");
@@ -103,7 +124,6 @@ public class CustomerProfileFragment extends Fragment {
             mEtCity.setText(city);
             mEtMobile.setText(mobile);
         }catch (Exception g){}
-
 
         mTvLogOut = rootView.findViewById(R.id.log_out_btn);
         mTvLogOut.setOnClickListener(new View.OnClickListener() {
@@ -133,14 +153,6 @@ public class CustomerProfileFragment extends Fragment {
             }
         });
 
-        mTvEditProfile = rootView.findViewById(R.id.edit_profile);
-        mTvEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
 
         mBtnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,7 +180,156 @@ public class CustomerProfileFragment extends Fragment {
             }
         });
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageBrowse();
+            }
+        });
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageUpload();
+
+            }
+        });
+
+        updateImage();
+
         return rootView;
+    }
+
+    private void imageBrowse() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            if(requestCode == PICK_IMAGE_REQUEST){
+                Uri picUri = data.getData();
+
+                filePath = getPath(picUri);
+                imageView.setImageURI(picUri);
+
+            }
+        }
+    }
+
+    private String getPath(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(getContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
+    private void imageUpload(){
+        try {
+            final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
+            RequestBody requestFile1 = null;
+            MultipartBody.Part body1 = null;
+            File file1 = new File(filePath);
+            SharedPreferencesClass.setLocalSharedPreference(getContext(),"image_name",filePath);
+            requestFile1 = RequestBody.create(MediaType.parse("*/*"), file1);
+            body1 = MultipartBody.Part.createFormData("formdata", file1.getName(), requestFile1);
+            Endpoints endPoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<ProfilePic> call = endPoints.uploadFile(VLF_BASE_URL+"pic",body1, Integer.parseInt(ID));
+            call.enqueue(new Callback<ProfilePic>() {
+                @Override
+                public void onResponse(Call<ProfilePic> call, Response<ProfilePic> response) {
+
+                    ProfilePic profilePic;
+                    ArrayList<pic> picArrayList;
+                    if (response.code()==200){
+                        myPd_ring.dismiss();
+                        profilePic = response.body();
+                        picArrayList = profilePic.getPic();
+
+                        for (pic i : picArrayList){
+
+                            try {
+                                Picasso.get().load(i.getProfile_photo_path().toString().trim())
+                                        .error(R.drawable.ic_baseline_account_balance_24)
+                                        .into(imageView);
+
+                            }catch (Exception ww)
+                            {
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ProfilePic> call, Throwable t) {
+
+                }
+            });
+        }catch (Exception g){
+
+            g.getMessage();
+        }
+
+    }
+
+
+    private void  updateImage(){
+        try {
+            image = localSP.getString("image_name","");
+            // final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
+            RequestBody requestFile1 = null;
+            MultipartBody.Part body1 = null;
+            File file1 = new File(image);
+            requestFile1 = RequestBody.create(MediaType.parse("*/*"), file1);
+            body1 = MultipartBody.Part.createFormData("formdata", file1.getName(), requestFile1);
+            Endpoints endPoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<ProfilePic> call = endPoints.uploadFile(VLF_BASE_URL+"pic",body1, Integer.parseInt(ID));
+            call.enqueue(new Callback<ProfilePic>() {
+                @Override
+                public void onResponse(Call<ProfilePic> call, Response<ProfilePic> response) {
+
+                    ProfilePic profilePic;
+                    ArrayList<pic> picArrayList;
+                    if (response.code()==200){
+                        //  myPd_ring.dismiss();
+                        profilePic = response.body();
+                        picArrayList = profilePic.getPic();
+
+                        for (pic i : picArrayList){
+
+                            try {
+                                Picasso.get().load(i.getProfile_photo_path().toString().trim())
+                                        .error(R.drawable.ic_baseline_account_balance_24)
+                                        .into(imageView);
+
+                                String image = i.getProfile_photo_path().toString().trim();
+
+                                SharedPreferencesClass.setLocalSharedPreference(getContext(),"image_name",image);
+
+                            }catch (Exception ww)
+                            {
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ProfilePic> call, Throwable t) {
+
+                }
+            });
+        }catch (Exception g){
+
+            g.getMessage();
+        }
     }
 
     private void customerProfileUpdate(ArrayList<profile> profiles) {

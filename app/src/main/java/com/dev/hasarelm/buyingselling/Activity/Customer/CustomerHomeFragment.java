@@ -74,6 +74,7 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
     private CheckBox mChkAll;
     private Dialog add_dialog;
     static int AddID;
+    String D_ID;
 
     public CustomerHomeFragment() {
 
@@ -93,10 +94,12 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
 
             localSP = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);
             districtID = localSP.getString("district", "");
+            D_ID = localSP.getString("district_type","");
             d_ID = Integer.parseInt(districtID);
 
         } catch (Exception g) {
         }
+
 
         mBtnFilter = rootView.findViewById(R.id.customer_home_fragment_filter);
         mBtnFilter.setOnClickListener(this);
@@ -175,7 +178,7 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
 
         Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-        Call<AllAdvertisementsModel> call = endpoints.getAllAddsList(VLF_BASE_URL + "advertisements");
+        Call<AllAdvertisementsModel> call = endpoints.getAllAddsList(VLF_BASE_URL + "advertisements", Integer.parseInt(D_ID));
         call.enqueue(new Callback<AllAdvertisementsModel>() {
             @Override
             public void onResponse(Call<AllAdvertisementsModel> call, Response<AllAdvertisementsModel> response) {
@@ -184,6 +187,8 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
 
                     mAdvertisementsModel = response.body();
                     advertisements = mAdvertisementsModel.getAdvertisements();
+
+                    myPd_ring.dismiss();
 
                     if (advertisements.size() > 0) {
 

@@ -4,9 +4,18 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +24,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.loader.content.CursorLoader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,12 +47,14 @@ import com.dev.hasarelm.buyingselling.Model.AllAdvertisementsModel;
 import com.dev.hasarelm.buyingselling.Model.CustomerRegisterModel;
 import com.dev.hasarelm.buyingselling.Model.DeleteSellerAdd;
 import com.dev.hasarelm.buyingselling.Model.DistrictsModel;
+import com.dev.hasarelm.buyingselling.Model.ProfilePic;
 import com.dev.hasarelm.buyingselling.Model.ProfileUpdates;
 import com.dev.hasarelm.buyingselling.Model.UserDetails;
 import com.dev.hasarelm.buyingselling.Model.VehicleTypeModel;
 import com.dev.hasarelm.buyingselling.Model.advertisementDelete;
 import com.dev.hasarelm.buyingselling.Model.advertisements;
 import com.dev.hasarelm.buyingselling.Model.districtTypes;
+import com.dev.hasarelm.buyingselling.Model.pic;
 import com.dev.hasarelm.buyingselling.Model.profile;
 import com.dev.hasarelm.buyingselling.Model.profileUpdate;
 import com.dev.hasarelm.buyingselling.Model.register;
@@ -49,20 +63,31 @@ import com.dev.hasarelm.buyingselling.R;
 import com.dev.hasarelm.buyingselling.interfaces.addDeleteListner;
 import com.dev.hasarelm.buyingselling.interfaces.addLongClickListner;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 import static com.dev.hasarelm.buyingselling.Common.BaseUrl.VLF_BASE_URL;
 
 public class SellerProfileFragment extends Fragment implements addDeleteListner<advertisements> , addLongClickListner<advertisements> {
@@ -91,6 +116,12 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
     private Activity activity;
     private DeleteSellerAdd mDeleteSellerAdd;
     private ArrayList<advertisementDelete> mAdvertisementDelete;
+    private TextView mTvpic_upload;
+
+    static final int PICK_IMAGE_REQUEST = 1;
+    String filePath;
+    ImageView imageView;
+    String image="";
 
     public SellerProfileFragment(){
 
@@ -106,8 +137,17 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
         rootView = inflater.inflate(R.layout.seller_user_profile, container, false);
 
+        mTvpic_upload = rootView.findViewById(R.id.pic_upload);
+        imageView = rootView.findViewById(R.id.image_upload);
         mTvSellerUsername = rootView.findViewById(R.id.seller_username);
         mTvSellerMobile = rootView.findViewById(R.id.seller_mobile);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageBrowse();
+            }
+        });
 
         String uname ="";
         String mobile ="";
@@ -174,8 +214,152 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
             getDistricts();
         }catch (Exception f){}*/
 
+        mTvpic_upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                imageUpload();
+            }
+        });
+
+
+        updateImage();
 
         return rootView;
+    }
+
+    private void imageBrowse() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // Start the Intent
+        startActivityForResult(galleryIntent, PICK_IMAGE_REQUEST);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            if(requestCode == PICK_IMAGE_REQUEST){
+                Uri picUri = data.getData();
+
+                filePath = getPath(picUri);
+                imageView.setImageURI(picUri);
+
+            }
+        }
+    }
+
+    private String getPath(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        CursorLoader loader = new CursorLoader(getContext(), contentUri, proj, null, null, null);
+        Cursor cursor = loader.loadInBackground();
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result = cursor.getString(column_index);
+        cursor.close();
+        return result;
+    }
+
+    private void imageUpload(){
+        try {
+            final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
+            RequestBody requestFile1 = null;
+            MultipartBody.Part body1 = null;
+            File file1 = new File(filePath);
+            SharedPreferencesClass.setLocalSharedPreference(getContext(),"image_name",filePath);
+            requestFile1 = RequestBody.create(MediaType.parse("*/*"), file1);
+            body1 = MultipartBody.Part.createFormData("formdata", file1.getName(), requestFile1);
+            Endpoints endPoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<ProfilePic> call = endPoints.uploadFile(VLF_BASE_URL+"pic",body1, Integer.parseInt(ID));
+            call.enqueue(new Callback<ProfilePic>() {
+                @Override
+                public void onResponse(Call<ProfilePic> call, Response<ProfilePic> response) {
+
+                    ProfilePic profilePic;
+                    ArrayList<pic> picArrayList;
+                    if (response.code()==200){
+                        myPd_ring.dismiss();
+                        profilePic = response.body();
+                        picArrayList = profilePic.getPic();
+
+                        for (pic i : picArrayList){
+
+                            try {
+                                Picasso.get().load(i.getProfile_photo_path().toString().trim())
+                                        .error(R.drawable.ic_baseline_account_balance_24)
+                                        .into(imageView);
+
+                                 image = i.getProfile_photo_path().toString().trim();
+
+
+                            }catch (Exception ww)
+                            {
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ProfilePic> call, Throwable t) {
+
+                }
+            });
+        }catch (Exception g){
+
+            g.getMessage();
+        }
+
+    }
+
+    private void  updateImage(){
+        try {
+            image = localSP.getString("image_name","");
+           // final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
+            RequestBody requestFile1 = null;
+            MultipartBody.Part body1 = null;
+            File file1 = new File(image);
+            requestFile1 = RequestBody.create(MediaType.parse("*/*"), file1);
+            body1 = MultipartBody.Part.createFormData("formdata", file1.getName(), requestFile1);
+            Endpoints endPoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<ProfilePic> call = endPoints.uploadFile(VLF_BASE_URL+"pic",body1, Integer.parseInt(ID));
+            call.enqueue(new Callback<ProfilePic>() {
+                @Override
+                public void onResponse(Call<ProfilePic> call, Response<ProfilePic> response) {
+
+                    ProfilePic profilePic;
+                    ArrayList<pic> picArrayList;
+                    if (response.code()==200){
+                      //  myPd_ring.dismiss();
+                        profilePic = response.body();
+                        picArrayList = profilePic.getPic();
+
+                        for (pic i : picArrayList){
+
+                            try {
+                                Picasso.get().load(i.getProfile_photo_path().toString().trim())
+                                        .error(R.drawable.ic_baseline_account_balance_24)
+                                        .into(imageView);
+
+                                String image = i.getProfile_photo_path().toString().trim();
+
+                                SharedPreferencesClass.setLocalSharedPreference(getContext(),"image_name",image);
+
+                            }catch (Exception ww)
+                            {
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ProfilePic> call, Throwable t) {
+
+                }
+            });
+        }catch (Exception g){
+
+            g.getMessage();
+        }
     }
 
     private void getVehicleTypes() {

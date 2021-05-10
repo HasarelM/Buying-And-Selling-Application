@@ -58,6 +58,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
+                        android:id="@+id/customo"
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:layout_marginTop="15dp"
@@ -74,26 +75,23 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="15dp"
                             android:textSize="15dp" />
 
                         <TextView
                             android:id="@+id/user_name_mobile"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:visibility="visible"
                             android:layout_marginLeft="10dp"
                             android:layout_marginTop="2dp"
                             android:textSize="15dp" />
 
                         <TextView
-                            android:id="@+id/edit_profile"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/pic_upload_customer"
                             android:layout_marginLeft="10dp"
-                            android:layout_marginTop="2dp"
-                            android:text="Edit profile "
-                            android:textSize="15dp" />
-
+                            android:text="Upload picture"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
 
                 </LinearLayout>

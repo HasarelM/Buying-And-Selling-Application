@@ -74,6 +74,7 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
     private String districtID;
     private int d_ID;
     public static SharedPreferences localSP;
+    String D_ID;
 
     public static SharedPreferences localSp;
     private String userID;
@@ -97,6 +98,7 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
 
             localSP = this.getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE+Context.MODE_PRIVATE);
             districtID = localSP.getString("districtID","");
+            D_ID = localSP.getString("districttype","");
             d_ID = Integer.parseInt(districtID);
 
         }catch (Exception g){}
@@ -337,10 +339,6 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
                         if (sMinute<10){
 
                             format_min = "0"+minutes;
-                           /*
-                            if (format_min.startsWith("0")){
-
-                            }*/
                         }
 
                         if (sHour<10)
@@ -435,6 +433,7 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
         create.setTo_time(toTime);
         create.setFrom_time(fromTime);
         create.setSub_description(imagene);
+        create.setDistrict_id(Integer.parseInt(D_ID));
         advertisementCreates.add(create);
 
         return  advertisementCreates;
