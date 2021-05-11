@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -75,6 +74,8 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
     private int d_ID;
     public static SharedPreferences localSP;
     String D_ID;
+    private int SelectedID;
+    private ArrayList<routes> routes;
 
     public static SharedPreferences localSp;
     private String userID;
@@ -227,6 +228,7 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
                         mRouteModel = response.body();
                         mRoutesArrayList = mRouteModel.getRoutes();
                         String routeName;
+                        int id;
 
                         for (routes rt : mRoutesArrayList) {
 
@@ -243,8 +245,10 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                                routeID = position;
+                                Object object = parent.getItemAtPosition(position);
 
+                                String type = String.valueOf(object);
+                                getselectedID(type);
                             }
 
                             @Override
@@ -266,6 +270,52 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
         } catch (Exception g) {
         }
 
+    }
+
+    private int getselectedID(String type) {
+
+         if (type.equals("Godagama-Maharagama")){
+             SelectedID = 1;
+        }else if (type.equals("Malabe-Colombo")){
+             SelectedID = 2;
+        }else if (type.equals("Moratuwa-Colombo")){
+             SelectedID = 3;
+        }else if (type.equals("Battaramulla-Dehiwala")){
+             SelectedID = 4;
+        }else if (type.equals("Angoda-Colombo")){
+             SelectedID = 5;
+        }else if (type.equals("Kalegana-Galle")){
+             SelectedID = 16;
+        }else if (type.equals("Hikkaduwa Galle")){
+             SelectedID = 17;
+        }else if (type.equals("Labuduwa-Galle")){
+             SelectedID = 18;
+        }else if (type.equals("Koggala-Galle")){
+             SelectedID = 19;
+        }else if (type.equals("Galle-Karapitiya")){
+             SelectedID = 20;
+        }else if (type.equals("Gampaha-Kelaniya")){
+             SelectedID = 6;
+        }else if (type.equals("Wattala-Gampaha")){
+             SelectedID = 7;
+        }else if (type.equals("Kiribathgoda-Kadawatha")){
+             SelectedID = 8;
+        }else if (type.equals("Nittabuwa-Gampaha")){
+             SelectedID = 9;
+        }else if (type.equals("Minuwangoda-Gampaha")){
+             SelectedID = 10;
+        }else if (type.equals("Panadura-Kalutara")){
+             SelectedID = 11;
+        }else if (type.equals("Kalutara-Horana")){
+             SelectedID = 12;
+        }else if (type.equals("Matugama-Kalutara")){
+             SelectedID = 13;
+        }else if (type.equals("Aluthgama-Kalutara")){
+             SelectedID = 14;
+        }else if (type.equals("Bandaragama-Kalutara")){
+             SelectedID = 15;
+        }
+        return SelectedID;
     }
 
     @Override
@@ -411,12 +461,10 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
     private ArrayList<advertisementCreate> addCreated(){
 
         int ID = Integer.parseInt(userID);
-
         ArrayList<advertisementCreate> advertisementCreates = new ArrayList<>();
         advertisementCreate create = new advertisementCreate();
-
         int categoryID = mSpCategory.getSelectedItemPosition();
-        int routePlane = routeID;
+        String routePlane = mSpRoutePlane.getSelectedItem()+"";
         String title = mEtTitle.getText().toString().trim();
         String description = mEtDescription.getText().toString().trim();
         String date = mEtDate.getText().toString().trim();
@@ -426,7 +474,7 @@ public class SellerAddActivity extends AppCompatActivity implements View.OnClick
 
         create.setSeller_id(ID);
         create.setCategory_id(categoryID);
-        create.setRoute_id(routePlane);
+        create.setRoute_id(SelectedID);
         create.setTitle(title);
         create.setDescription(description);
         create.setDate(date);

@@ -176,7 +176,6 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
     private void allAdds() {
 
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
-
         Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
         Call<AllAdvertisementsModel> call = endpoints.getAllAddsList(VLF_BASE_URL + "advertisements", Integer.parseInt(D_ID));
         call.enqueue(new Callback<AllAdvertisementsModel>() {
