@@ -209,11 +209,6 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
         getSellerOwnAdds(userID);
 
-     /*   try {
-            getVehicleTypes();
-            getDistricts();
-        }catch (Exception f){}*/
-
         mTvpic_upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -275,6 +270,8 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
                 @Override
                 public void onResponse(Call<ProfilePic> call, Response<ProfilePic> response) {
 
+                    myPd_ring.dismiss();
+
                     ProfilePic profilePic;
                     ArrayList<pic> picArrayList;
                     if (response.code()==200){
@@ -301,7 +298,7 @@ public class SellerProfileFragment extends Fragment implements addDeleteListner<
 
                 @Override
                 public void onFailure(Call<ProfilePic> call, Throwable t) {
-
+                    myPd_ring.dismiss();
                 }
             });
         }catch (Exception g){

@@ -142,7 +142,6 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
     private void filterMethods(int category_id, int rout_id) {
 
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
-
         Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
         Call<AllAdvertisementsModel> call = endpoints.getAddFilter(VLF_BASE_URL + "advertisements?category_id=", rout_id,category_id );
         call.enqueue(new Callback<AllAdvertisementsModel>() {
