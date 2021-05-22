@@ -148,6 +148,7 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
             @Override
             public void onResponse(Call<AllAdvertisementsModel> call, Response<AllAdvertisementsModel> response) {
 
+                myPd_ring.dismiss();
                 if (response.code() == 200) {
 
                     myPd_ring.dismiss();
@@ -174,35 +175,38 @@ public class CustomerHomeFragment extends Fragment implements View.OnClickListen
 
     private void allAdds() {
 
-        final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
-        Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-        Call<AllAdvertisementsModel> call = endpoints.getAllAddsList(VLF_BASE_URL + "advertisements", Integer.parseInt(D_ID));
-        call.enqueue(new Callback<AllAdvertisementsModel>() {
-            @Override
-            public void onResponse(Call<AllAdvertisementsModel> call, Response<AllAdvertisementsModel> response) {
-
-                if (response.code() == 200) {
-
-                    mAdvertisementsModel = response.body();
-                    advertisements = mAdvertisementsModel.getAdvertisements();
+        try {
+            final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
+            Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
+            Call<AllAdvertisementsModel> call = endpoints.getAllAddsList(VLF_BASE_URL + "advertisements", Integer.parseInt(D_ID));
+            call.enqueue(new Callback<AllAdvertisementsModel>() {
+                @Override
+                public void onResponse(Call<AllAdvertisementsModel> call, Response<AllAdvertisementsModel> response) {
 
                     myPd_ring.dismiss();
+                    if (response.code() == 200) {
 
-                    if (advertisements.size() > 0) {
-
-                        setupRecyclerView(advertisements);
+                        mAdvertisementsModel = response.body();
+                        advertisements = mAdvertisementsModel.getAdvertisements();
 
                         myPd_ring.dismiss();
+
+                        if (advertisements.size() > 0) {
+
+                            setupRecyclerView(advertisements);
+
+                            myPd_ring.dismiss();
+                        }
                     }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<AllAdvertisementsModel> call, Throwable t) {
+                @Override
+                public void onFailure(Call<AllAdvertisementsModel> call, Throwable t) {
 
-                myPd_ring.dismiss();
-            }
-        });
+                    myPd_ring.dismiss();
+                }
+            });
+        }catch (Exception g){}
     }
 
     private void getCategoryTypes() {
