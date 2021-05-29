@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dev.hasarelm.buyingselling.Model.orderCreate;
@@ -61,6 +62,7 @@ public class CustomerOrderViewAdapter extends RecyclerView.Adapter<CustomerOrder
 
     public class OrderViewHolder extends RecyclerView.ViewHolder {
         TextView mTvRefNo,mTvOrderDetails,mTvDate,mTvStatus;
+        CardView cardView;
 
         public OrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,6 +71,7 @@ public class CustomerOrderViewAdapter extends RecyclerView.Adapter<CustomerOrder
             mTvDate = itemView.findViewById(R.id.order_list_layout_order_date);
             mTvOrderDetails = itemView.findViewById(R.id.order_list_layout_order_details);
             mTvStatus = itemView.findViewById(R.id.order_list_layout_order_status);
+            cardView = itemView.findViewById(R.id.donater_notificatcart_view_icon);
 
            /* itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

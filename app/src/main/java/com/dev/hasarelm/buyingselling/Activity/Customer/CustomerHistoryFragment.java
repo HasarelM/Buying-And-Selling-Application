@@ -79,27 +79,19 @@ public class CustomerHistoryFragment  extends Fragment /*implements orderItemCli
         } catch (Exception g) {
         }
 
-        getUserOrderList(userID,1);
+      //  getUserOrderList(userID,1);
 
         mRbComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean checked = ((RadioButton) v).isChecked();
-                if (checked==true){
-
-                    getUserOrderList(userID,3);
-                }
+                getUserOrderList(userID,3);
             }
         });
 
         mRbPending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean checked = ((RadioButton) v).isChecked();
-                if (checked==true){
-
                     getUserOrderList(userID,1);
-                }
             }
         });
 

@@ -45,8 +45,8 @@ public class SellerHistoryFragment extends Fragment implements orderHistoryClick
     View rootView;
 
     public SellerHistoryFragment(){
-
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class SellerHistoryFragment extends Fragment implements orderHistoryClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.seller_history_fragment, container, false);
-
         try {
 
             localSp = getContext().getSharedPreferences(SharedPreferencesClass.SETTINGS, Context.MODE_PRIVATE + Context.MODE_PRIVATE);

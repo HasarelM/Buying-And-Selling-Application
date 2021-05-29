@@ -2,7 +2,6 @@
     <string name="app_name">Buying&amp;Selling</string>
 
     <string name="country_prompt">Choose a country</string>
-
     <string-array name="country_arrays">
         <item>Malaysia</item>
         <item>United States</item>
@@ -13,4 +12,5 @@
         <item>New Zealand</item>
         <item>India</item>
     </string-array>
+
 </resources>

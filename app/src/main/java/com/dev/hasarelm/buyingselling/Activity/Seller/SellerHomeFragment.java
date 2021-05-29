@@ -91,7 +91,7 @@ public class SellerHomeFragment extends Fragment implements customerOrderClickLi
         final ProgressDialog myPd_ring = ProgressDialog.show(getContext(), "Please wait", "", true);
         try {
             Endpoints endpoints = RetrofitClient.getLoginClient().create(Endpoints.class);
-            Call<OrderList> call = endpoints.getAll(VLF_BASE_URL + "orders",1);
+            Call<OrderList> call = endpoints.getAll(VLF_BASE_URL + "orders",1, Integer.parseInt(userID));
             call.enqueue(new Callback<OrderList>() {
                 @Override
                 public void onResponse(Call<OrderList> call, Response<OrderList> response) {

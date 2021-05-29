@@ -110,7 +110,7 @@ public interface Endpoints {
 
     @Headers({"Content-Type: application/json"})
     @GET
-    Call<OrderList> getAll(@Url String Url,@Query("status") int status);
+    Call<OrderList> getAll(@Url String Url,@Query("status") int status,@Query("seller_id") int seller_id);
 
     @Headers({"Content-Type: application/json"})
     @PUT
